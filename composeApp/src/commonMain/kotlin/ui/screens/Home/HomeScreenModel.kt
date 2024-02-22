@@ -2,6 +2,7 @@ package ui.screens.Home
 
 import cafe.adriel.voyager.core.model.StateScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
+import data.api.ApiResponse
 import data.model.Movie
 import data.repository.MovieRepository
 import kotlinx.coroutines.launch
@@ -19,7 +20,15 @@ class HomeScreenModel(
     fun getNowPlaying() {
         screenModelScope.launch {
             mutableState.value = State.Loading
-            mutableState.value = State.Result(movies = repository.getNowPlaying().results)
+
+            repository.getNowPlaying().collect { result ->
+                when (result) {
+                    is ApiResponse.Success -> mutableState.value =
+                        State.Result(movies = result.data.results)
+
+                    is ApiResponse.Error -> mutableState.value = State.Error
+                }
+            }
         }
     }
 }
