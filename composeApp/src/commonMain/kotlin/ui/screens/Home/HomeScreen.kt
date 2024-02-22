@@ -19,7 +19,7 @@ object HomeScreen: Screen {
             is HomeScreenModel.State.Default -> Text("Default")
             is HomeScreenModel.State.Loading -> Text("Loading")
             is HomeScreenModel.State.Error -> Text("Error")
-            is HomeScreenModel.State.Result -> Text("Error")
+            is HomeScreenModel.State.Result -> Text("Result")
         }
 
         LaunchedEffect(currentCompositeKeyHash) {

@@ -1,5 +1,6 @@
 package data.api
 
+import com.example.project.BuildKonfig.API_KEY
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 import io.ktor.client.HttpClient
@@ -34,7 +35,7 @@ val httpClient = HttpClient {
             append("language", "pt-BR")
             append("page", "1")
         }
-        header("Authorization", "Bearer ")
+        header("Authorization", "Bearer $API_KEY")
     }
 }.also {
     Napier.base(DebugAntilog())

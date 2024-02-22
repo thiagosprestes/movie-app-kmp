@@ -1,5 +1,6 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 import org.jetbrains.compose.ExperimentalComposeLibrary
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -7,6 +8,7 @@ plugins {
     alias(libs.plugins.jetbrainsCompose)
 
     kotlin("plugin.serialization") version "1.9.22"
+    id("com.codingfeline.buildkonfig") version "0.15.1"
 }
 
 kotlin {
@@ -107,3 +109,11 @@ android {
     }
 }
 
+buildkonfig {
+    packageName = "com.example.project"
+
+    defaultConfigs {
+        val apiKey = gradleLocalProperties(rootDir).getProperty("API_KEY")
+        buildConfigField(STRING, "API_KEY", apiKey)
+    }
+}

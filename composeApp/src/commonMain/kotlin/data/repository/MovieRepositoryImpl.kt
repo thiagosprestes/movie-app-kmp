@@ -14,7 +14,7 @@ class MovieRepositoryImpl(
 ) : MovieRepository {
     override suspend fun getNowPlaying(): Flow<ApiResponse<MovieResponse>> {
         val apiCall = safeApiCall {
-            val response = httpClient.get("movie/popular")
+            val response = httpClient.get("movie/now_playing")
             response.body<MovieResponse>()
         }
 
