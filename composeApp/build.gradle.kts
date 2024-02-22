@@ -5,6 +5,8 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
+
+    kotlin("plugin.serialization") version "1.9.22"
 }
 
 kotlin {
@@ -65,6 +67,8 @@ kotlin {
             implementation(libs.slf4j.api)
             implementation(libs.logback.android)
             implementation(libs.napier)
+
+            implementation(libs.kotlinx.serialization.json)
         }
     }
 }
