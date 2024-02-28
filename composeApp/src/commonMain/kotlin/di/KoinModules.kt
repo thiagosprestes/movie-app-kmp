@@ -1,8 +1,8 @@
 package di
 
 import data.api.httpClient
-import data.repository.MovieRepository
-import data.repository.MovieRepositoryImpl
+import data.repository.HomeRepository
+import data.repository.HomeRepositoryImpl
 import org.koin.dsl.module
 import ui.screens.Home.HomeScreenModel
 
@@ -11,7 +11,7 @@ val httpClientModule = module {
 }
 
 val movieRepositoryModule = module {
-    single<MovieRepository> { MovieRepositoryImpl(get()) }
+    single<HomeRepository> { HomeRepositoryImpl(get()) }
 }
 
 val homeScreenModelModule = module {

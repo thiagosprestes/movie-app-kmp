@@ -1,4 +1,4 @@
-package data.model
+package data.model.Movie
 
 
 import kotlinx.serialization.SerialName
@@ -17,7 +17,7 @@ data class Movie(
     @SerialName("original_language")
     val originalLanguage: String,
     @SerialName("original_title")
-    val originalTitle: String,
+    val originalTitle: String? = null,
     @SerialName("overview")
     val overview: String,
     @SerialName("popularity")
@@ -25,11 +25,11 @@ data class Movie(
     @SerialName("poster_path")
     val posterPath: String,
     @SerialName("release_date")
-    val releaseDate: String,
+    val releaseDate: String? = null,
     @SerialName("title")
-    val title: String,
+    val title: String? = null,
     @SerialName("video")
-    val video: Boolean,
+    val video: Boolean? = null,
     @SerialName("vote_average")
     val voteAverage: Double,
     @SerialName("vote_count")

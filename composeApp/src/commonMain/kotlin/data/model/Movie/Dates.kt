@@ -1,4 +1,4 @@
-package data.model
+package data.model.Movie
 
 
 import kotlinx.serialization.SerialName

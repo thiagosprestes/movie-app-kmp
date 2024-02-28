@@ -1,11 +1,12 @@
-package data.model
+package data.model.Upcoming
 
-
+import data.model.Movie.Dates
+import data.model.Movie.Movie
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class MovieResponse(
+data class UpcomingResponse(
     @SerialName("dates")
     val dates: Dates,
     @SerialName("page")

@@ -21,7 +21,7 @@ val httpClient = HttpClient {
                 Napier.v(tag = "HTTP Client", message = message)
             }
         }
-        level = LogLevel.HEADERS
+        level = LogLevel.BODY
     }
     install(ContentNegotiation) {
         json(Json {
@@ -30,10 +30,10 @@ val httpClient = HttpClient {
         })
     }
     defaultRequest {
-        url("https://api.themoviedb.org/3/")
-        parameters {
-            append("language", "pt-BR")
-            append("page", "1")
+        url {
+            url("https://api.themoviedb.org/3/")
+            parameters.append("language", "pt-BR")
+            // parameters.append("page", "1")
         }
         header("Authorization", "Bearer $API_KEY")
     }

@@ -71,6 +71,8 @@ kotlin {
             implementation(libs.napier)
 
             implementation(libs.kotlinx.serialization.json)
+
+            implementation(libs.kamel.image)
         }
     }
 }
