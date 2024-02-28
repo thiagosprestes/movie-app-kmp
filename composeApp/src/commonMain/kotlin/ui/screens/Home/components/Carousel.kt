@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
@@ -89,17 +90,17 @@ fun CarouselItem(movie: Movie) {
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CarouselIndicator(pagerState: PagerState) {
-    Row(
+    LazyRow(
         modifier = Modifier.padding(vertical = 10.dp).fillMaxWidth(),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        repeat(pagerState.pageCount) { iteration ->
+        items(pagerState.pageCount, key = { it }) {
             val color =
-                if (pagerState.currentPage == iteration) primaryWhite else primaryWhite.copy(
+                if (pagerState.currentPage == it) primaryWhite else primaryWhite.copy(
                     alpha = 0.3f
                 )
-            val size = if (pagerState.currentPage == iteration) 10.dp else 8.dp
+            val size = if (pagerState.currentPage == it) 10.dp else 8.dp
 
             Box(
                 modifier = Modifier

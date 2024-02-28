@@ -53,7 +53,11 @@ fun MoviesList(
                 start = 16.dp, end = 6.dp
             )
         ) {
-            items(movies) { movie ->
+            items(
+                movies, key = { item ->
+                    item.id
+                }
+            ) { movie ->
                 Box(
                     Modifier
                         .width(150.dp)
@@ -94,8 +98,8 @@ fun MoviesList(
                                 horizontalArrangement = Arrangement.SpaceBetween,
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
-                                Row {
-                                    repeat(numOfStars) {
+                                LazyRow {
+                                    items(numOfStars, key = { it }) {
                                         Icon(
                                             Icons.Filled.Star,
                                             contentDescription = null,
