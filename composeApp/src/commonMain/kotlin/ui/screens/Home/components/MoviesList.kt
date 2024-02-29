@@ -1,6 +1,7 @@
 package ui.screens.Home.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -24,10 +25,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import data.model.Movie.Movie
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import ui.components.RatingLevel
+import ui.screens.Movie.MovieScreen
 import ui.theme.primaryWhite
 
 @Composable
@@ -35,6 +39,8 @@ fun MoviesList(
     title: String,
     movies: List<Movie>
 ) {
+    val navigator = LocalNavigator.currentOrThrow
+
     Column {
         Text(
             title,
@@ -47,20 +53,20 @@ fun MoviesList(
                 start = 16.dp, end = 6.dp
             )
         ) {
-            items(
-                movies, key = { item ->
-                    item.id
-                }
-            ) { movie ->
+            items(movies, key = { it.id }
+            ) {
                 Box(
                     Modifier
                         .width(150.dp)
                         .height(243.dp)
                         .padding(end = 10.dp)
                         .clip(RoundedCornerShape(10.dp))
+                        .clickable {
+                            navigator.push(MovieScreen(it.id))
+                        }
                 ) {
                     KamelImage(
-                        resource = asyncPainterResource("https://image.tmdb.org/t/p/original/${movie.posterPath}"),
+                        resource = asyncPainterResource("https://image.tmdb.org/t/p/original/${it.posterPath}"),
                         contentDescription = null,
                         contentScale = ContentScale.FillHeight,
                     )
@@ -82,7 +88,7 @@ fun MoviesList(
                     ) {
                         Column {
                             Text(
-                                movie.title!!,
+                                it.title!!,
                                 color = primaryWhite,
                                 fontSize = 14.sp,
                                 modifier = Modifier.padding(bottom = 10.dp)
@@ -92,9 +98,9 @@ fun MoviesList(
                                 horizontalArrangement = Arrangement.SpaceBetween,
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
-                                RatingLevel(movie.voteAverage, 10.dp)
+                                RatingLevel(it.voteAverage, 10.dp)
                                 Text(
-                                    "(${movie.voteCount})",
+                                    "(${it.voteCount})",
                                     color = primaryWhite,
                                     fontSize = 12.sp,
                                 )

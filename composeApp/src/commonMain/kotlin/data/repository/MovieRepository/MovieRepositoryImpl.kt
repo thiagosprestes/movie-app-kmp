@@ -2,6 +2,7 @@ package data.repository.MovieRepository
 
 import data.api.ApiResponse
 import data.model.Movie.MovieResponse
+import data.model.MovieCredits.MovieCreditsResponse
 import data.model.MovieDetail.MovieDetailResponse
 import data.utils.safeApiCall
 import io.ktor.client.HttpClient
@@ -17,6 +18,24 @@ class MovieRepositoryImpl(
         val apiCall = safeApiCall {
             val response = httpClient.get("movie/$id")
             response.body<MovieDetailResponse>()
+        }
+
+        return flowOf(apiCall)
+    }
+
+    override suspend fun getCredits(id: Int): Flow<ApiResponse<MovieCreditsResponse>> {
+        val apiCall = safeApiCall {
+            val response = httpClient.get("movie/$id/credits")
+            response.body<MovieCreditsResponse>()
+        }
+
+        return flowOf(apiCall)
+    }
+
+    override suspend fun getSimilar(id: Int): Flow<ApiResponse<MovieResponse>> {
+        val apiCall = safeApiCall {
+            val response = httpClient.get("movie/$id/similar")
+            response.body<MovieResponse>()
         }
 
         return flowOf(apiCall)
