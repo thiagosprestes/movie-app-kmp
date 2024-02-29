@@ -12,6 +12,7 @@ import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.request.header
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
+import utils.BASE_URL
 
 val httpClient = HttpClient {
     install(Logging) {
@@ -30,7 +31,7 @@ val httpClient = HttpClient {
     }
     defaultRequest {
         url {
-            url("https://api.themoviedb.org/3/")
+            url(BASE_URL)
             parameters.append("language", "pt-BR")
             // parameters.append("page", "1")
         }

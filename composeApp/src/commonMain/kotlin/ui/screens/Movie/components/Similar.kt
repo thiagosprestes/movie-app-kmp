@@ -30,6 +30,7 @@ import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import ui.screens.Movie.MovieScreen
 import ui.theme.primaryWhite
+import utils.PATH_BASE_URL
 
 @Composable
 fun Similar(similarMovies: List<Movie>) {
@@ -54,7 +55,7 @@ fun Similar(similarMovies: List<Movie>) {
                     }
             ) {
                 KamelImage(
-                    resource = asyncPainterResource("https://image.tmdb.org/t/p/original/${it.posterPath}"),
+                    resource = asyncPainterResource("$PATH_BASE_URL${it.posterPath}"),
                     contentDescription = null,
                     contentScale = ContentScale.FillHeight,
                 )

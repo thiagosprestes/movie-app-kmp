@@ -38,6 +38,7 @@ import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import ui.screens.Movie.MovieScreen
 import ui.theme.primaryWhite
+import utils.PATH_BASE_URL
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -80,7 +81,7 @@ fun CarouselItem(movie: Movie) {
             }
     ) {
         KamelImage(
-            resource = asyncPainterResource("https://image.tmdb.org/t/p/original/${movie.backdropPath}"),
+            resource = asyncPainterResource("$PATH_BASE_URL${movie.backdropPath}"),
             contentScale = ContentScale.FillBounds,
             contentDescription = null
         )

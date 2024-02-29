@@ -27,6 +27,7 @@ import io.kamel.image.asyncPainterResource
 import ui.components.RatingLevel
 import ui.theme.background
 import ui.theme.primaryWhite
+import utils.PATH_BASE_URL
 
 @Composable
 fun Details(
@@ -44,7 +45,7 @@ fun Details(
             .height(350.dp)
     ) {
         KamelImage(
-            resource = asyncPainterResource("https://image.tmdb.org/t/p/original/${backdrop}"),
+            resource = asyncPainterResource("${PATH_BASE_URL}${backdrop}"),
             contentScale = ContentScale.FillHeight,
             contentDescription = null
         )

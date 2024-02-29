@@ -34,6 +34,7 @@ import io.kamel.image.asyncPainterResource
 import ui.components.RatingLevel
 import ui.screens.Movie.MovieScreen
 import ui.theme.primaryWhite
+import utils.PATH_BASE_URL
 
 @Composable
 fun MoviesList(
@@ -73,7 +74,7 @@ fun MoviesList(
                         }
                 ) {
                     KamelImage(
-                        resource = asyncPainterResource("https://image.tmdb.org/t/p/original/${it.posterPath}"),
+                        resource = asyncPainterResource("$PATH_BASE_URL${it.posterPath}"),
                         contentDescription = null,
                         contentScale = ContentScale.FillHeight,
                     )

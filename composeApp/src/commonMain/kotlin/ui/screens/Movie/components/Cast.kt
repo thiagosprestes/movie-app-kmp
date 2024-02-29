@@ -20,6 +20,7 @@ import data.model.MovieCredits.Cast
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import ui.theme.primaryWhite
+import utils.PATH_BASE_URL
 
 @Composable
 fun Cast(cast: List<Cast>) {
@@ -37,7 +38,7 @@ fun Cast(cast: List<Cast>) {
                 modifier = Modifier.padding(end = 23.dp)
             ) {
                 KamelImage(
-                    asyncPainterResource("https://image.tmdb.org/t/p/original/${it.profilePath}"),
+                    asyncPainterResource("$PATH_BASE_URL${it.profilePath}"),
                     contentScale = ContentScale.FillWidth,
                     modifier = Modifier
                         .padding(bottom = 10.dp)
