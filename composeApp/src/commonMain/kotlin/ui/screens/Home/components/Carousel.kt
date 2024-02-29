@@ -2,6 +2,7 @@ package ui.screens.Home.components
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -29,9 +30,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import data.model.Movie.Movie
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
+import ui.screens.Movie.MovieScreen
 import ui.theme.primaryWhite
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -57,11 +61,13 @@ fun Carousel(
 
 @Composable
 fun CarouselItem(movie: Movie) {
+    val navigator = LocalNavigator.currentOrThrow
+
     Box(
         Modifier
             .height(190.dp)
             .width(320.dp)
-            .clip(RoundedCornerShape(10.dp))
+            .clip(RoundedCornerShape(10.dp)).clickable { navigator.push(MovieScreen(movie.id)) }
     ) {
         KamelImage(
             resource = asyncPainterResource("https://image.tmdb.org/t/p/original/${movie.backdropPath}"),

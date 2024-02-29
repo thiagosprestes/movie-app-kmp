@@ -4,8 +4,7 @@ import cafe.adriel.voyager.core.model.StateScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
 import data.api.ApiResponse
 import data.model.Movie.Movie
-import data.model.Trending.TrendingItem
-import data.repository.HomeRepository
+import data.repository.HomeRepository.HomeRepository
 import io.github.aakira.napier.Napier
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

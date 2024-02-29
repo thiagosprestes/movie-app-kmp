@@ -1,4 +1,4 @@
-package data.repository
+package data.repository.HomeRepository
 
 import data.api.ApiResponse
 import data.model.Movie.MovieResponse

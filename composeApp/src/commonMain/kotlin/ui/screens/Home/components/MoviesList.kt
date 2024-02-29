@@ -14,10 +14,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Icon
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,6 +27,7 @@ import androidx.compose.ui.unit.sp
 import data.model.Movie.Movie
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
+import ui.components.RatingLevel
 import ui.theme.primaryWhite
 
 @Composable
@@ -37,10 +35,6 @@ fun MoviesList(
     title: String,
     movies: List<Movie>
 ) {
-    val numOfStars = 5
-
-    fun renderRating(item: Int, level: Int): Boolean = item <= (level * numOfStars) / 10
-
     Column {
         Text(
             title,
@@ -98,20 +92,7 @@ fun MoviesList(
                                 horizontalArrangement = Arrangement.SpaceBetween,
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
-                                LazyRow {
-                                    items(numOfStars, key = { it }) {
-                                        Icon(
-                                            Icons.Filled.Star,
-                                            contentDescription = null,
-                                            Modifier.height(10.dp).width(10.dp),
-                                            tint = if (renderRating(
-                                                    item = it,
-                                                    level = movie.voteAverage.toInt()
-                                                )
-                                            ) Color.Yellow else Color.Gray
-                                        )
-                                    }
-                                }
+                                RatingLevel(movie.voteAverage, 10.dp)
                                 Text(
                                     "(${movie.voteCount})",
                                     color = primaryWhite,
