@@ -20,7 +20,7 @@ val httpClient = HttpClient {
                 Napier.v(tag = "HTTP Client", message = message)
             }
         }
-        level = LogLevel.BODY
+        level = LogLevel.HEADERS
     }
     install(ContentNegotiation) {
         json(Json {

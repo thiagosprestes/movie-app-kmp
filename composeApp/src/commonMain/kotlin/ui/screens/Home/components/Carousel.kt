@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import data.model.Movie.Movie
+import io.github.aakira.napier.Napier
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import ui.screens.Movie.MovieScreen
@@ -61,13 +62,22 @@ fun Carousel(
 
 @Composable
 fun CarouselItem(movie: Movie) {
+    val LOG_TAG = "Carousel"
+
     val navigator = LocalNavigator.currentOrThrow
 
     Box(
         Modifier
             .height(190.dp)
             .width(320.dp)
-            .clip(RoundedCornerShape(10.dp)).clickable { navigator.push(MovieScreen(movie.id)) }
+            .clip(RoundedCornerShape(10.dp))
+            .clickable {
+                Napier.i(
+                    tag = LOG_TAG,
+                    message = "on press item with title:${movie.title} id ${movie.id}"
+                )
+                navigator.push(MovieScreen(movie.id))
+            }
     ) {
         KamelImage(
             resource = asyncPainterResource("https://image.tmdb.org/t/p/original/${movie.backdropPath}"),

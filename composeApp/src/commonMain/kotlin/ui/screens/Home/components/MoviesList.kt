@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import data.model.Movie.Movie
+import io.github.aakira.napier.Napier
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import ui.components.RatingLevel
@@ -39,6 +40,8 @@ fun MoviesList(
     title: String,
     movies: List<Movie>
 ) {
+    val LOG_TAG = "MoviesList"
+
     val navigator = LocalNavigator.currentOrThrow
 
     Column {
@@ -62,6 +65,10 @@ fun MoviesList(
                         .padding(end = 10.dp)
                         .clip(RoundedCornerShape(10.dp))
                         .clickable {
+                            Napier.i(
+                                tag = LOG_TAG,
+                                message = "on press item with title:${it.title} id ${it.id}"
+                            )
                             navigator.push(MovieScreen(it.id))
                         }
                 ) {

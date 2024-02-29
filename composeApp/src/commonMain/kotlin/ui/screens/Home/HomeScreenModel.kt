@@ -13,6 +13,8 @@ import kotlinx.coroutines.launch
 class HomeScreenModel(
     private val repository: HomeRepository
 ) : StateScreenModel<HomeScreenModel.State>(State.Loading) {
+    private val LOG_TAG = "HomeScreenModel"
+
     private val _nowPlaying = MutableStateFlow<List<Movie>>(emptyList())
     val nowPlaying = _nowPlaying.asStateFlow()
 
@@ -29,6 +31,7 @@ class HomeScreenModel(
     }
 
     init {
+        Napier.i(tag = LOG_TAG, message = "Init HomeScreenModel")
         screenModelScope.launch {
             getNowPlaying()
             getTrending()
