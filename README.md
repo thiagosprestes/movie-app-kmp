@@ -1,14 +1,57 @@
-This is a Kotlin Multiplatform project targeting Android, iOS.
+<h1 align="center">
+<br>
+Movie App KMP
+</h1>
 
-* `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - `commonMain` is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    `iosMain` would be the right folder for such calls.
+# 📋 Índice
 
-* `/iosApp` contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform, 
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+- [Telas](#-Telas)
+- [Sobre o projeto](#-Sobre-o-projeto)
+- [Tecnologias utilizadas](#-Tecnologias-utilizadas)
+- [Rodando o app](#-Rodando-o-app)
 
+## 🎨 Telas
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+<p float="left">
+<img src=".github/home.png" width-="400" height="400">
+<img src=".github/movie.png" width-="400" height="400">
+<img src=".github/similar.png" width-="400" height="400">
+</p>
+
+## 📃 Sobre o projeto
+
+<p align="center">
+App desenvolvido com intuito de aprender mais sobre Compose Multiplatform, utilizando algumas das principais ferramentas utilizadas pela comunidade, junto com o framework. Parte do layout foi baseada no protótipo desse <a href="https://www.figma.com/community/file/1119545637831909826/ticket-booking-app">link</a>, desenvolvido pela Nickelfox Design. Os dados do app são provenientes da API pública do TMDB.
+</p>
+
+## 🛠 Tecnologias utilizadas
+
+- 📱 **Compose multiplatform** — Aplicativo mobile para Android e iOS.
+- 🛸 **Voyager** — Navegação entre telas e estrutura base para ViewModels.
+- 🪙 **Koin** — Injeção de dependências.
+- 💻 **Ktor** — Requisições para a API.
+- 🔐️ **Kotlinx serialization** — Desserialização de dados vindos da API.
+- 🕛 **Coroutines** — Chamadas assíncronas.
+- 📝 **Napier** — Logs da aplicação.
+- 🖼️ **Kamel** — Renderização de imagens vindas da API.
+- 🗓️️ **Kotlinx** datetime — Formatação de datas.
+
+## 🚀 Rodando o app
+
+### Pré-requisitos
+
+- Android Studio
+- Macos (Para rodar a versão de iOS)
+- Cadastro no TMDB para geração de uma API key
+
+### Passo-a-passo
+
+<ol>
+  <li>Abra a pasta raiz do projeto no Android Studio.</li>
+  <li>Localize o arquivo `local.properties`.</li>
+  <li>Adicione a seguinte linha:
+  API_KEY=sua_api_key_gerada_no_tmdb.
+  </li>
+  <li>Selecione a opção `composeApp` na barra superior do Android Studio e aperte o botão play.</li>
+  <li>Caso deseje rodar a versão de iOS, selecione a opção `iosApp` na barra superior do Android Studio e aperte o botão play.</li>
+</ol>
