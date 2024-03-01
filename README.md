@@ -21,7 +21,13 @@ Movie App KMP
 ## 📃 Sobre o projeto
 
 <p align="center">
-App desenvolvido com intuito de aprender mais sobre Compose Multiplatform, utilizando algumas das principais ferramentas utilizadas pela comunidade, junto com o framework. Parte do layout foi baseada no protótipo desse <a href="https://www.figma.com/community/file/1119545637831909826/ticket-booking-app">link</a>, desenvolvido pela Nickelfox Design. Os dados do app são provenientes da API pública do TMDB.
+App desenvolvido com intuito de aprender mais sobre Compose Multiplatform, utilizando algumas das principais ferramentas utilizadas pela comunidade, junto com o framework. 
+</p>
+<p>
+Parte do layout foi baseada no protótipo desse <a href="https://www.figma.com/community/file/1119545637831909826/ticket-booking-app">link</a>, desenvolvido pela Nickelfox Design.
+</p>
+<p>
+Os dados do app são provenientes da API pública do TMDB.
 </p>
 
 ## 🛠 Tecnologias utilizadas
@@ -42,7 +48,7 @@ App desenvolvido com intuito de aprender mais sobre Compose Multiplatform, utili
 
 - Android Studio
 - Macos (Para rodar a versão de iOS)
-- Cadastro no TMDB para geração de uma API key
+- Cadastro no <a href="https://developer.themoviedb.org/docs/getting-started">TMDB</a> para geração de uma API key
 
 ### Passo-a-passo
 
