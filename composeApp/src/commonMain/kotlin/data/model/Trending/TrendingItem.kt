@@ -9,7 +9,7 @@ data class TrendingItem(
     @SerialName("adult")
     val adult: Boolean,
     @SerialName("backdrop_path")
-    val backdropPath: String,
+    val backdropPath: String? = null,
     @SerialName("first_air_date")
     val firstAirDate: String? = null,
     @SerialName("genre_ids")

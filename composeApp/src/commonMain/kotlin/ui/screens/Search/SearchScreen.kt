@@ -10,18 +10,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Icon
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material.TextFieldDefaults
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -38,11 +34,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import cafe.adriel.voyager.core.model.rememberNavigatorScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import data.model.Movie.Movie
 import io.github.aakira.napier.Napier
@@ -53,12 +47,12 @@ import ui.components.Error
 import ui.components.Loading
 import ui.screens.Movie.MovieScreen
 import ui.screens.Movie.SearchScreenModel
-import ui.theme.background
+import ui.theme.backgroundGradient
 import ui.theme.darkenRed
 import ui.theme.primaryWhite
 import utils.PATH_BASE_URL
 
-data class SearchScreen(val id: Int) : Screen {
+object SearchScreen : Screen {
     private val LOG_TAG = "SearchScreen"
 
     @Composable
@@ -68,8 +62,6 @@ data class SearchScreen(val id: Int) : Screen {
         val screenModel = getScreenModel<SearchScreenModel>()
         val state by screenModel.state.collectAsState()
 
-        val navigator = LocalNavigator.currentOrThrow
-
         LaunchedEffect(key1 = textInput) {
             if (textInput.isBlank()) return@LaunchedEffect
 
@@ -78,26 +70,24 @@ data class SearchScreen(val id: Int) : Screen {
             screenModel.getSearchItems(textInput)
         }
 
-        Column(Modifier.background(background).fillMaxSize().padding(16.dp)) {
-            Icon(
-                Icons.Filled.ArrowBack,
-                modifier = Modifier
-                    .padding(bottom = 8.dp)
-                    .size(24.dp)
-                    .clickable {
-                        Napier.i(tag = LOG_TAG, message = "press back button")
-                        navigator.pop()
-                    },
-                tint = primaryWhite,
-                contentDescription = null,
-            )
+        Column(
+            Modifier.background(
+                backgroundGradient
+            ).fillMaxSize().padding(16.dp)
+        ) {
             Row {
                 OutlinedTextField(
                     value = textInput,
                     onValueChange = { textInput = it },
                     shape = RoundedCornerShape(8.dp),
                     modifier = Modifier.fillMaxWidth(),
-                    label = { Text("Buscar...", fontWeight = FontWeight.SemiBold) },
+                    label = {
+                        Text(
+                            "Buscar...",
+                            fontWeight = FontWeight.SemiBold,
+                            color = primaryWhite
+                        )
+                    },
                     colors = TextFieldDefaults.outlinedTextFieldColors(
                         backgroundColor = primaryWhite.copy(0.3F),
                         focusedBorderColor = darkenRed,
@@ -117,77 +107,77 @@ data class SearchScreen(val id: Int) : Screen {
 
                 is SearchScreenModel.State.Default -> null
                 is SearchScreenModel.State.Result -> SearchResults(
-                    (state as SearchScreenModel.State.Result).movies,
-                    navigator
+                    (state as SearchScreenModel.State.Result).movies
                 )
 
                 else -> {}
             }
         }
     }
-}
 
-@Composable
-fun SearchResults(movies: List<Movie>, navigator: Navigator) {
-    val LOG_TAG = "SearchItem"
+    @Composable
+    fun SearchResults(movies: List<Movie>) {
+        val navigator = LocalNavigator.currentOrThrow
 
-    Column {
-        Text(
-            "Resultados",
-            color = primaryWhite,
-            fontSize = 16.sp,
-            fontWeight = FontWeight.SemiBold,
-            modifier = Modifier.padding(vertical = 16.dp)
-        )
-        LazyVerticalStaggeredGrid(
-            columns = StaggeredGridCells.Fixed(3),
-            modifier = Modifier.fillMaxSize(),
-            horizontalArrangement = Arrangement.spacedBy(10.dp),
-            verticalItemSpacing = 10.dp
-        ) {
-            items(movies, key = { it.id }) {
-                Box(
-                    Modifier
-                        .width(120.dp)
-                        .height(213.dp)
-                        .clip(RoundedCornerShape(10.dp))
-                        .clickable {
-                            Napier.i(
-                                tag = LOG_TAG,
-                                message = "press search item with id: ${it.id} title: ${it.title}"
-                            )
-                            navigator.push(MovieScreen(it.id))
-                        }
-                ) {
-                    KamelImage(
-                        resource = asyncPainterResource("$PATH_BASE_URL${it.posterPath}"),
-                        contentDescription = null,
-                        contentScale = ContentScale.FillHeight,
-                    )
+        Column {
+            Text(
+                "Resultados",
+                color = primaryWhite,
+                fontSize = 16.sp,
+                fontWeight = FontWeight.SemiBold,
+                modifier = Modifier.padding(vertical = 16.dp)
+            )
+            LazyVerticalStaggeredGrid(
+                columns = StaggeredGridCells.Fixed(3),
+                modifier = Modifier.fillMaxSize(),
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+                verticalItemSpacing = 10.dp
+            ) {
+                items(movies, key = { it.id }) {
                     Box(
                         Modifier
-                            .fillMaxSize()
-                            .background(
-                                brush = Brush.verticalGradient(
-                                    0F to Color.Transparent,
-                                    .5F to Color.Black.copy(alpha = 0.5F),
-                                    1F to Color.Black.copy(alpha = 0.8F)
+                            .width(120.dp)
+                            .height(213.dp)
+                            .clip(RoundedCornerShape(10.dp))
+                            .clickable {
+                                Napier.i(
+                                    tag = LOG_TAG,
+                                    message = "press search item with id: ${it.id} title: ${it.title}"
                                 )
-                            )
-                    )
-                    Row(
-                        modifier = Modifier
-                            .align(Alignment.BottomStart)
-                            .padding(10.dp)
+                                navigator.push(MovieScreen(it.id))
+                            }
                     ) {
-                        Text(
-                            it.title!!,
-                            color = primaryWhite,
-                            fontSize = 12.sp
+                        KamelImage(
+                            resource = asyncPainterResource("$PATH_BASE_URL${it.posterPath}"),
+                            contentDescription = null,
+                            contentScale = ContentScale.FillHeight,
                         )
+                        Box(
+                            Modifier
+                                .fillMaxSize()
+                                .background(
+                                    brush = Brush.verticalGradient(
+                                        0F to Color.Transparent,
+                                        .5F to Color.Black.copy(alpha = 0.5F),
+                                        1F to Color.Black.copy(alpha = 0.8F)
+                                    )
+                                )
+                        )
+                        Row(
+                            modifier = Modifier
+                                .align(Alignment.BottomStart)
+                                .padding(10.dp)
+                        ) {
+                            Text(
+                                it.title!!,
+                                color = primaryWhite,
+                                fontSize = 12.sp
+                            )
+                        }
                     }
                 }
             }
         }
     }
 }
+

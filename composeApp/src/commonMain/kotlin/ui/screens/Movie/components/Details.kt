@@ -25,13 +25,13 @@ import data.model.MovieDetail.Genre
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import ui.components.RatingLevel
-import ui.theme.background
+import ui.theme.backgroundEnd
 import ui.theme.primaryWhite
 import utils.PATH_BASE_URL
 
 @Composable
 fun Details(
-    backdrop: String,
+    backdrop: String? = null,
     title: String,
     genres: List<Genre>,
     runtime: Int,
@@ -54,7 +54,7 @@ fun Details(
                 .fillMaxSize()
                 .background(
                     brush = Brush.verticalGradient(
-                        listOf(Color.Transparent, background),
+                        listOf(Color.Transparent, backgroundEnd),
                         0f,
                         850f
                     )

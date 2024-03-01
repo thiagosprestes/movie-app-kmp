@@ -37,7 +37,7 @@ import ui.components.Loading
 import ui.screens.Movie.components.Cast
 import ui.screens.Movie.components.Details
 import ui.screens.Movie.components.Similar
-import ui.theme.background
+import ui.theme.backgroundEnd
 import ui.theme.primaryWhite
 
 data class MovieScreen(val id: Int) : Screen {
@@ -60,7 +60,7 @@ data class MovieScreen(val id: Int) : Screen {
             }
         }
 
-        Column(Modifier.background(background).fillMaxSize()) {
+        Column(Modifier.background(backgroundEnd).fillMaxSize()) {
             Column {
                 Box {
                     when (state) {
@@ -103,8 +103,8 @@ data class MovieScreen(val id: Int) : Screen {
 fun Default(movie: MovieDetailResponse?, cast: List<Cast>, similar: List<Movie>) {
     Column(Modifier.verticalScroll(rememberScrollState())) {
         Details(
-            movie?.backdropPath!!,
-            movie.title,
+            movie?.backdropPath,
+            movie?.title!!,
             movie.genres,
             movie.runtime,
             movie.releaseDate,
