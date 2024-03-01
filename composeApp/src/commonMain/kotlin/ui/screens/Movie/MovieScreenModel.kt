@@ -1,18 +1,13 @@
 package ui.screens.Movie
 
 import cafe.adriel.voyager.core.model.StateScreenModel
-import cafe.adriel.voyager.core.model.screenModelScope
 import data.api.ApiResponse
 import data.model.Movie.Movie
 import data.model.MovieCredits.Cast
 import data.model.MovieDetail.MovieDetailResponse
-import data.repository.HomeRepository.HomeRepository
 import data.repository.MovieRepository.MovieRepository
-import io.github.aakira.napier.Napier
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
-import ui.screens.Home.HomeScreenModel
 
 class MovieScreenModel(
     private val repository: MovieRepository

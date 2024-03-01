@@ -9,9 +9,9 @@ data class MovieDetailResponse(
     @SerialName("adult")
     val adult: Boolean,
     @SerialName("backdrop_path")
-    val backdropPath: String,
+    val backdropPath: String? = null,
     @SerialName("budget")
-    val budget: Int,
+    val budget: Long,
     @SerialName("genres")
     val genres: List<Genre>,
     @SerialName("homepage")
@@ -37,7 +37,7 @@ data class MovieDetailResponse(
     @SerialName("release_date")
     val releaseDate: String,
     @SerialName("revenue")
-    val revenue: Int,
+    val revenue: Long,
     @SerialName("runtime")
     val runtime: Int,
     @SerialName("spoken_languages")

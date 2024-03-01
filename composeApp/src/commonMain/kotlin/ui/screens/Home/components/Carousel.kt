@@ -108,7 +108,7 @@ fun CarouselItem(movie: Movie) {
 @Composable
 fun CarouselIndicator(pagerState: PagerState) {
     LazyRow(
-        modifier = Modifier.padding(vertical = 10.dp).fillMaxWidth(),
+        modifier = Modifier.padding(top = 10.dp).fillMaxWidth(),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {
