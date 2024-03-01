@@ -16,6 +16,7 @@ Movie App KMP
 <img src=".github/home.png" width-="400" height="400">
 <img src=".github/movie.png" width-="400" height="400">
 <img src=".github/similar.png" width-="400" height="400">
+<img src=".github/search.png" width-="400" height="400">
 </p>
 
 ## 📃 Sobre o projeto
