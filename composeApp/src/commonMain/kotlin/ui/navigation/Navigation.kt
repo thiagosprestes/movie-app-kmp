@@ -20,8 +20,8 @@ import cafe.adriel.voyager.navigator.tab.TabNavigator
 import com.example.core.presentation.theme.bottomBar
 import com.example.core.presentation.theme.darkenRed
 import com.example.core.presentation.theme.primaryWhite
-import ui.navigation.tabs.HomeTab
-import ui.navigation.tabs.SearchTab
+import com.example.navigation.tabs.HomeTab
+import com.example.navigation.tabs.SearchTab
 
 @Composable
 fun Navigation() {

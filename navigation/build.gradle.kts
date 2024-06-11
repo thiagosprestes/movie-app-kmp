@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.jetbrainsCompose)
+    alias(libs.plugins.compose.compiler)
 }
 
 kotlin {
@@ -25,6 +27,12 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            api(libs.voyager.navigator)
+            api(libs.voyager.screenmodel)
+            api(libs.voyager.koin)
+            api(libs.voyager.transitions)
+            api(libs.voyager.tab.navigator)
+
             implementation(project(":core"))
         }
     }

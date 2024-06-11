@@ -1,5 +1,3 @@
-import org.jetbrains.compose.ExperimentalComposeLibrary
-
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
@@ -28,23 +26,7 @@ kotlin {
     }
     
     sourceSets {
-        
-        androidMain.dependencies {
-            implementation(libs.compose.ui.tooling.preview)
-            implementation(libs.androidx.activity.compose)
-            implementation(libs.kotlinx.coroutines.android)
-        }
         commonMain.dependencies {
-            @OptIn(ExperimentalComposeLibrary::class)
-            implementation(compose.components.resources)
-
-            implementation(libs.voyager.transitions)
-            implementation(libs.voyager.tab.navigator)
-
-            implementation(libs.kotlinx.coroutines.core)
-
-            implementation(libs.kotlinx.datetime)
-
             implementation(project(":core"))
             implementation(project(":network"))
             implementation(project(":home"))

@@ -1,4 +1,4 @@
-package ui.navigation.tabs
+package com.example.navigation.tabs
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
@@ -8,7 +8,8 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
-import ui.screens.Search.SearchScreen
+import com.example.navigation.SharedScreen
+import com.example.navigation.utils.getScreenRegistry
 
 object SearchTab : Tab {
     override val options: TabOptions
@@ -28,6 +29,6 @@ object SearchTab : Tab {
 
     @Composable
     override fun Content() {
-        Navigator(SearchScreen)
+        Navigator(getScreenRegistry(SharedScreen.Search))
     }
 }

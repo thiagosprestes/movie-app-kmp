@@ -27,30 +27,29 @@ kotlin {
     }
 
     sourceSets {
+        androidMain.dependencies {
+            implementation(libs.compose.ui.tooling.preview)
+            implementation(libs.androidx.activity.compose)
+            implementation(libs.kotlinx.coroutines.android)
+        }
         commonMain.dependencies {
             api(compose.runtime)
             api(compose.foundation)
             api(compose.material)
             api(compose.ui)
 
-            implementation(libs.kotlinx.serialization.json)
-
             api(libs.koin.core)
-
-            api(libs.voyager.navigator)
-            api(libs.voyager.screenmodel)
-            api(libs.voyager.koin)
 
             api(libs.napier)
 
             api(libs.kamel.image)
 
-            api("io.coil-kt.coil3:coil:3.0.0-alpha06")
-            api("io.coil-kt.coil3:coil-compose:3.0.0-alpha06")
-            api("io.coil-kt.coil3:coil-network-ktor:3.0.0-alpha06")
+            api(libs.coil3.coil)
+            api(libs.coil.compose)
+            api(libs.coil.network.ktor)
 
-        }
-        commonTest.dependencies {
+            implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.kotlinx.serialization.json)
         }
     }
 }

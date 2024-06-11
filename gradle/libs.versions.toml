@@ -11,6 +11,7 @@ androidx-espresso-core = "3.5.1"
 androidx-material = "1.12.0"
 androidx-test-junit = "1.1.5"
 coil = "2.6.0"
+coilVersion = "3.0.0-alpha06"
 compose = "1.6.7"
 compose-plugin = "1.6.11"
 junit = "4.13.2"
@@ -30,6 +31,9 @@ buildConfig = "5.3.5"
 
 [libraries]
 coil = { module = "io.coil-kt:coil", version.ref = "coil" }
+coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilVersion" }
+coil-network-ktor = { module = "io.coil-kt.coil3:coil-network-ktor", version.ref = "coilVersion" }
+coil3-coil = { module = "io.coil-kt.coil3:coil", version.ref = "coilVersion" }
 kamel-image = { module = "media.kamel:kamel-image", version.ref = "kamelImage" }
 koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinCore" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinCore" }
