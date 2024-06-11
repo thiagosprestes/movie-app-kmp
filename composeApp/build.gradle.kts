@@ -6,8 +6,8 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
-
-    kotlin("plugin.serialization") version "1.9.22"
+    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.serialization)
     id("com.codingfeline.buildkonfig") version "0.15.1"
 }
 
