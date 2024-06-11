@@ -32,13 +32,13 @@ import io.github.aakira.napier.Napier
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import ui.components.Error
-import ui.components.Loading
+import com.example.core.presentation.composables.Error
+import com.example.core.presentation.composables.Loading
 import ui.screens.Movie.components.Cast
 import ui.screens.Movie.components.Details
 import ui.screens.Movie.components.Similar
-import ui.theme.backgroundEnd
-import ui.theme.primaryWhite
+import com.example.core.presentation.theme.backgroundEnd
+import com.example.core.presentation.theme.primaryWhite
 
 data class MovieScreen(val id: Int) : Screen {
     override val key = "screenId_$id"

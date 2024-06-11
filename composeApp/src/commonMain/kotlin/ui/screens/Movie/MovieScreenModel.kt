@@ -3,7 +3,7 @@ package ui.screens.Movie
 import cafe.adriel.voyager.core.model.StateScreenModel
 import com.example.core.data.model.movieCredits.Cast
 import com.example.core.data.model.movieDetail.MovieDetailResponse
-import com.example.network.model.ApiResponse
+import com.example.network.utils.ApiResponse
 import data.model.Movie.Movie
 import data.repository.MovieRepository.MovieRepository
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -38,6 +38,7 @@ class MovieScreenModel(
                 }
 
                 is ApiResponse.Error -> mutableState.value = State.Error
+                ApiResponse.Loading -> TODO()
             }
         }
     }
@@ -53,6 +54,7 @@ class MovieScreenModel(
                 }
 
                 is ApiResponse.Error -> mutableState.value = State.Error
+                ApiResponse.Loading -> TODO()
             }
         }
     }
@@ -68,6 +70,7 @@ class MovieScreenModel(
                 }
 
                 is ApiResponse.Error -> mutableState.value = State.Error
+                ApiResponse.Loading -> TODO()
             }
         }
     }

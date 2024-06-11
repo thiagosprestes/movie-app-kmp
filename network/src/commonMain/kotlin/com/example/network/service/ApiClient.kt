@@ -1,6 +1,6 @@
 package com.example.network.service
 
-import com.example.network.utils.BASE_URL
+import com.example.core.utils.BASE_URL
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 import io.ktor.client.HttpClient

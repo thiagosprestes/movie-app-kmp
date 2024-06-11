@@ -2,7 +2,7 @@ package data.repository.MovieRepository
 
 import com.example.core.data.model.movieCredits.MovieCreditsResponse
 import com.example.core.data.model.movieDetail.MovieDetailResponse
-import com.example.network.model.ApiResponse
+import com.example.network.utils.ApiResponse
 import data.model.Movie.MovieResponse
 import kotlinx.coroutines.flow.Flow
 

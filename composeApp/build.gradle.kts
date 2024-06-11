@@ -35,27 +35,19 @@ kotlin {
             implementation(libs.kotlinx.coroutines.android)
         }
         commonMain.dependencies {
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material)
-            implementation(compose.ui)
             @OptIn(ExperimentalComposeLibrary::class)
             implementation(compose.components.resources)
 
-            implementation(libs.voyager.navigator)
-            implementation(libs.voyager.screenmodel)
             implementation(libs.voyager.transitions)
-            implementation(libs.voyager.koin)
             implementation(libs.voyager.tab.navigator)
 
             implementation(libs.kotlinx.coroutines.core)
-
-            implementation(libs.kamel.image)
 
             implementation(libs.kotlinx.datetime)
 
             implementation(project(":core"))
             implementation(project(":network"))
+            implementation(project(":home"))
         }
     }
 }

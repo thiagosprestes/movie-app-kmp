@@ -25,12 +25,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.example.network.utils.PATH_BASE_URL
+import com.example.core.utils.PATH_BASE_URL
 import data.model.Movie.Movie
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import ui.screens.Movie.MovieScreen
-import ui.theme.primaryWhite
+import com.example.core.presentation.theme.primaryWhite
 
 @Composable
 fun Similar(similarMovies: List<Movie>) {

@@ -2,7 +2,7 @@ package ui.screens.Movie
 
 import cafe.adriel.voyager.core.model.StateScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
-import com.example.network.model.ApiResponse
+import com.example.network.utils.ApiResponse
 import data.model.Movie.Movie
 import data.repository.SearchRepository.SearchRepository
 import kotlinx.coroutines.launch
@@ -27,6 +27,7 @@ class SearchScreenModel(
                 }
 
                 is ApiResponse.Error -> mutableState.value = State.Error
+                ApiResponse.Loading -> TODO()
             }
         }
     }

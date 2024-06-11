@@ -1,6 +1,6 @@
 package data.repository.SearchRepository
 
-import com.example.network.model.ApiResponse
+import com.example.network.utils.ApiResponse
 import data.model.Movie.MovieResponse
 import kotlinx.coroutines.flow.Flow
 

@@ -10,15 +10,14 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.navigator.tab.CurrentTab
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
-import ui.theme.bottomBar
-import ui.theme.darkenRed
-import ui.theme.primaryWhite
+import com.example.core.presentation.theme.bottomBar
+import com.example.core.presentation.theme.darkenRed
+import com.example.core.presentation.theme.primaryWhite
 
 @Composable
 fun Navigation() {

@@ -1,6 +1,6 @@
 import androidx.compose.runtime.Composable
 import ui.navigation.Navigation
-import ui.theme.AppTheme
+import com.example.core.presentation.theme.AppTheme
 
 @Composable
 fun App() {

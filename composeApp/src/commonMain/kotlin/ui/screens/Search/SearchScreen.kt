@@ -38,19 +38,19 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.example.network.utils.PATH_BASE_URL
+import com.example.core.utils.PATH_BASE_URL
 import data.model.Movie.Movie
 import io.github.aakira.napier.Napier
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import kotlinx.coroutines.delay
-import ui.components.Error
-import ui.components.Loading
+import com.example.core.presentation.composables.Error
+import com.example.core.presentation.composables.Loading
 import ui.screens.Movie.MovieScreen
 import ui.screens.Movie.SearchScreenModel
-import ui.theme.backgroundGradient
-import ui.theme.darkenRed
-import ui.theme.primaryWhite
+import com.example.core.presentation.theme.backgroundGradient
+import com.example.core.presentation.theme.darkenRed
+import com.example.core.presentation.theme.primaryWhite
 
 object SearchScreen : Screen {
     private val LOG_TAG = "SearchScreen"

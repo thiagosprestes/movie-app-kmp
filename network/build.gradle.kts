@@ -41,7 +41,6 @@ kotlin {
 
             implementation(libs.slf4j.api)
             implementation(libs.logback.android)
-            api(libs.napier)
 
             implementation(project(":core"))
         }
