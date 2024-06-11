@@ -35,6 +35,8 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import coil3.compose.AsyncImage
 import com.example.core.presentation.theme.primaryWhite
 import com.example.home.data.model.HomeMovie
+import com.example.navigation.SharedScreen
+import com.example.navigation.utils.getScreenRegistry
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -67,7 +69,7 @@ fun CarouselItem(movie: HomeMovie) {
             .width(320.dp)
             .clip(RoundedCornerShape(10.dp))
             .clickable {
-//                navigator.push(MovieScreen(movie.id))
+                navigator.push(getScreenRegistry(SharedScreen.Movie(movie.id)))
             }
     ) {
         AsyncImage(

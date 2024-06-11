@@ -31,6 +31,8 @@ import coil3.compose.AsyncImage
 import com.example.core.presentation.composables.RatingLevel
 import com.example.core.presentation.theme.primaryWhite
 import com.example.home.data.model.HomeMovie
+import com.example.navigation.SharedScreen
+import com.example.navigation.utils.getScreenRegistry
 
 @Composable
 fun MoviesList(
@@ -60,7 +62,7 @@ fun MoviesList(
                         .padding(end = 10.dp)
                         .clip(RoundedCornerShape(10.dp))
                         .clickable {
-//                            navigator.push(MovieScreen(it.id))
+                            navigator.push(getScreenRegistry(SharedScreen.Movie(it.id)))
                         }
                 ) {
                     AsyncImage(
