@@ -1,6 +1,6 @@
 package com.example.home.domain.repository
 
-import com.example.home.data.model.HomeMovie
+import com.example.core.data.model.HomeMovie
 
 interface HomeRepository {
     suspend fun getNowPlaying(): List<HomeMovie>

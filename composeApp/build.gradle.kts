@@ -48,6 +48,7 @@ kotlin {
             implementation(project(":core"))
             implementation(project(":network"))
             implementation(project(":home"))
+            implementation(project(":movie"))
             implementation(project(":navigation"))
         }
     }

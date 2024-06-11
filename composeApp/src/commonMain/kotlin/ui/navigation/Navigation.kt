@@ -1,7 +1,9 @@
 package ui.navigation
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
@@ -18,6 +20,8 @@ import cafe.adriel.voyager.navigator.tab.TabNavigator
 import com.example.core.presentation.theme.bottomBar
 import com.example.core.presentation.theme.darkenRed
 import com.example.core.presentation.theme.primaryWhite
+import ui.navigation.tabs.HomeTab
+import ui.navigation.tabs.SearchTab
 
 @Composable
 fun Navigation() {
@@ -29,8 +33,10 @@ fun Navigation() {
                     TabNavigationItem(SearchTab)
                 }
             }
-        ) {
-            CurrentTab()
+        ) { padding ->
+            Column(Modifier.padding(padding)) {
+                CurrentTab()
+            }
         }
     }
 }

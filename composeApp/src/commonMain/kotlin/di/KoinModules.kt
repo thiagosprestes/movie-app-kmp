@@ -1,28 +1,12 @@
 package di
 
 import com.example.home.di.homeModule
+import com.example.movie.di.movieModule
 import com.example.network.di.networkModule
-import data.repository.HomeRepository.HomeRepository
-import data.repository.HomeRepository.HomeRepositoryImpl
-import data.repository.MovieRepository.MovieRepository
-import data.repository.MovieRepository.MovieRepositoryImpl
 import data.repository.SearchRepository.SearchRepository
 import data.repository.SearchRepository.SearchRepositoryImpl
 import org.koin.dsl.module
-import ui.screens.Movie.MovieScreenModel
 import ui.screens.Movie.SearchScreenModel
-
-val homeRepositoryModule = module {
-    single<HomeRepository> { HomeRepositoryImpl(get()) }
-}
-
-val movieRepositoryModule = module {
-    single<MovieRepository> { MovieRepositoryImpl(get()) }
-}
-
-val movieScreenModelModule = module {
-    factory { MovieScreenModel(get()) }
-}
 
 val searchRepositoryModule = module {
     single<SearchRepository> { SearchRepositoryImpl(get()) }
@@ -36,8 +20,7 @@ fun appModule() =
     listOf(
         networkModule,
         homeModule,
-        movieRepositoryModule,
-        movieScreenModelModule,
+        movieModule,
         searchRepositoryModule,
         searchScreenModelModule
     )

@@ -1,8 +1,8 @@
 package com.example.home.data.repository
 
+import com.example.core.data.model.HomeMovie
+import com.example.core.domain.mapper.toMovie
 import com.example.home.data.dataSource.MovieDataSource
-import com.example.home.data.model.HomeMovie
-import com.example.home.domain.mapper.toMovie
 import com.example.home.domain.repository.HomeRepository
 
 class HomeRepositoryImpl(

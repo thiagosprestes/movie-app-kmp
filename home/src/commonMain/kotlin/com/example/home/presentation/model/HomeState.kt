@@ -1,7 +1,7 @@
 package com.example.home.presentation.model
 
+import com.example.core.data.model.HomeMovie
 import com.example.core.data.model.ScreenState
-import com.example.home.data.model.HomeMovie
 
 data class HomeState(
     val state: ScreenState = ScreenState.LOADING,
