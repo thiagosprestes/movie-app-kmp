@@ -2,7 +2,7 @@ package ui.screens.Home
 
 import cafe.adriel.voyager.core.model.StateScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
-import data.api.ApiResponse
+import com.example.network.model.ApiResponse
 import data.model.Movie.Movie
 import data.repository.HomeRepository.HomeRepository
 import io.github.aakira.napier.Napier

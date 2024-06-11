@@ -32,13 +32,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.example.network.utils.PATH_BASE_URL
 import data.model.Movie.Movie
 import io.github.aakira.napier.Napier
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import ui.screens.Movie.MovieScreen
 import ui.theme.primaryWhite
-import utils.PATH_BASE_URL
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable

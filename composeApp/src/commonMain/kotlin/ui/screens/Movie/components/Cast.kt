@@ -17,10 +17,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.core.data.model.movieCredits.Cast
+import com.example.network.utils.PATH_BASE_URL
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import ui.theme.primaryWhite
-import utils.PATH_BASE_URL
 
 @Composable
 fun Cast(cast: List<Cast>) {

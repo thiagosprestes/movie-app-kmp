@@ -2,7 +2,7 @@ package ui.screens.Movie
 
 import cafe.adriel.voyager.core.model.StateScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
-import data.api.ApiResponse
+import com.example.network.model.ApiResponse
 import data.model.Movie.Movie
 import data.repository.SearchRepository.SearchRepository
 import kotlinx.coroutines.launch

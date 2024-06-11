@@ -26,6 +26,7 @@ voyagerScreenmodel = "1.0.0"
 ktor = "2.3.11"
 coroutines = "1.7.0"
 coreI18n = "1.0.0-alpha01"
+buildConfig = "5.3.5"
 
 [libraries]
 coil = { module = "io.coil-kt:coil", version.ref = "coil" }
@@ -71,3 +72,4 @@ jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+buildConfig = { id = "com.github.gmazzo.buildconfig", version.ref = "buildConfig" }

@@ -2,9 +2,9 @@ package data.repository.MovieRepository
 
 import com.example.core.data.model.movieCredits.MovieCreditsResponse
 import com.example.core.data.model.movieDetail.MovieDetailResponse
-import data.api.ApiResponse
+import com.example.network.model.ApiResponse
+import com.example.network.utils.safeApiCall
 import data.model.Movie.MovieResponse
-import data.utils.safeApiCall
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get

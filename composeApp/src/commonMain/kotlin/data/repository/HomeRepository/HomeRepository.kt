@@ -2,7 +2,7 @@ package data.repository.HomeRepository
 
 import com.example.core.data.model.Upcoming.UpcomingResponse
 import com.example.core.data.model.trending.TrendingResponse
-import data.api.ApiResponse
+import com.example.network.model.ApiResponse
 import data.model.Movie.MovieResponse
 import kotlinx.coroutines.flow.Flow
 

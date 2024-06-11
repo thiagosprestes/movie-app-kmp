@@ -1,6 +1,6 @@
-package data.api
+package com.example.network.service
 
-import com.example.project.BuildKonfig.API_KEY
+import com.example.network.utils.BASE_URL
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 import io.ktor.client.HttpClient
@@ -12,7 +12,7 @@ import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.request.header
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
-import utils.BASE_URL
+import movieAppKmp.network.BuildConfig.API_KEY
 
 val httpClient = HttpClient {
     install(Logging) {

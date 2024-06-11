@@ -23,12 +23,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.core.data.model.movieDetail.Genre
 import com.example.core.utils.DateTime
+import com.example.network.utils.PATH_BASE_URL
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import ui.components.RatingLevel
 import ui.theme.backgroundEnd
 import ui.theme.primaryWhite
-import utils.PATH_BASE_URL
 
 @Composable
 fun Details(

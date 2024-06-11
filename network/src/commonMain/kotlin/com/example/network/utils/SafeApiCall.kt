@@ -1,6 +1,6 @@
-package data.utils
+package com.example.network.utils
 
-import data.api.ApiResponse
+import com.example.network.model.ApiResponse
 import io.github.aakira.napier.Napier
 
 suspend fun <T> safeApiCall(apiCall: suspend () -> T): ApiResponse<T> {

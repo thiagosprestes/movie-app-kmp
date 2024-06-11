@@ -1,13 +1,10 @@
-import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 import org.jetbrains.compose.ExperimentalComposeLibrary
-import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
-    id("com.codingfeline.buildkonfig") version "0.15.1"
 }
 
 kotlin {
@@ -35,13 +32,7 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
-
-            implementation(libs.ktor.client.okhttp)
-
             implementation(libs.kotlinx.coroutines.android)
-        }
-        iosMain.dependencies {
-            implementation(libs.ktor.client.darwin)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -57,22 +48,14 @@ kotlin {
             implementation(libs.voyager.koin)
             implementation(libs.voyager.tab.navigator)
 
-            implementation(libs.ktor.client.core)
-            implementation(libs.ktor.client.core)
             implementation(libs.kotlinx.coroutines.core)
-            implementation(libs.ktor.client.logging)
-            implementation(libs.ktor.client.content.negotiation)
-            implementation(libs.ktor.serialization.kotlinx.json)
-
-            implementation(libs.slf4j.api)
-            implementation(libs.logback.android)
-            implementation(libs.napier)
 
             implementation(libs.kamel.image)
 
             implementation(libs.kotlinx.datetime)
 
             implementation(project(":core"))
+            implementation(project(":network"))
         }
     }
 }
@@ -111,11 +94,3 @@ android {
     }
 }
 
-buildkonfig {
-    packageName = "com.example.project"
-
-    defaultConfigs {
-        val apiKey = gradleLocalProperties(rootDir).getProperty("API_KEY")
-        buildConfigField(STRING, "API_KEY", apiKey)
-    }
-}

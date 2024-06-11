@@ -1,4 +1,4 @@
-package utils
+package com.example.network.utils
 
 const val BASE_URL = "https://api.themoviedb.org/3/"
 const val PATH_BASE_URL= "https://image.tmdb.org/t/p/original/"

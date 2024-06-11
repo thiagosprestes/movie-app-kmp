@@ -1,6 +1,6 @@
 package di
 
-import data.api.httpClient
+import com.example.network.di.networkModule
 import data.repository.HomeRepository.HomeRepository
 import data.repository.HomeRepository.HomeRepositoryImpl
 import data.repository.MovieRepository.MovieRepository
@@ -11,10 +11,6 @@ import org.koin.dsl.module
 import ui.screens.Home.HomeScreenModel
 import ui.screens.Movie.MovieScreenModel
 import ui.screens.Movie.SearchScreenModel
-
-val httpClientModule = module {
-    single { httpClient }
-}
 
 val homeRepositoryModule = module {
     single<HomeRepository> { HomeRepositoryImpl(get()) }
@@ -42,7 +38,7 @@ val searchScreenModelModule = module {
 
 fun appModule() =
     listOf(
-        httpClientModule,
+        networkModule,
         homeRepositoryModule,
         homeScreenModelModule,
         movieRepositoryModule,
