@@ -1,10 +1,10 @@
 package ui.screens.Movie
 
 import cafe.adriel.voyager.core.model.StateScreenModel
+import com.example.core.data.model.movieCredits.Cast
+import com.example.core.data.model.movieDetail.MovieDetailResponse
 import data.api.ApiResponse
 import data.model.Movie.Movie
-import data.model.MovieCredits.Cast
-import data.model.MovieDetail.MovieDetailResponse
 import data.repository.MovieRepository.MovieRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

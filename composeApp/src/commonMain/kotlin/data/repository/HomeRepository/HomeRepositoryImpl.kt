@@ -1,9 +1,9 @@
 package data.repository.HomeRepository
 
+import com.example.core.data.model.Upcoming.UpcomingResponse
+import com.example.core.data.model.trending.TrendingResponse
 import data.api.ApiResponse
 import data.model.Movie.MovieResponse
-import data.model.Trending.TrendingResponse
-import data.model.Upcoming.UpcomingResponse
 import data.utils.safeApiCall
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body

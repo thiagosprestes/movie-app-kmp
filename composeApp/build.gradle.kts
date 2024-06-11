@@ -7,7 +7,6 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
-    alias(libs.plugins.serialization)
     id("com.codingfeline.buildkonfig") version "0.15.1"
 }
 
@@ -58,8 +57,6 @@ kotlin {
             implementation(libs.voyager.koin)
             implementation(libs.voyager.tab.navigator)
 
-            implementation(libs.koin.core)
-
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.core)
             implementation(libs.kotlinx.coroutines.core)
@@ -71,11 +68,11 @@ kotlin {
             implementation(libs.logback.android)
             implementation(libs.napier)
 
-            implementation(libs.kotlinx.serialization.json)
-
             implementation(libs.kamel.image)
 
             implementation(libs.kotlinx.datetime)
+
+            implementation(project(":core"))
         }
     }
 }

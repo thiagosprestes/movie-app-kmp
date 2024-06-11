@@ -1,9 +1,9 @@
 package data.repository.MovieRepository
 
+import com.example.core.data.model.movieCredits.MovieCreditsResponse
+import com.example.core.data.model.movieDetail.MovieDetailResponse
 import data.api.ApiResponse
 import data.model.Movie.MovieResponse
-import data.model.MovieCredits.MovieCreditsResponse
-import data.model.MovieDetail.MovieDetailResponse
 import kotlinx.coroutines.flow.Flow
 
 interface MovieRepository {

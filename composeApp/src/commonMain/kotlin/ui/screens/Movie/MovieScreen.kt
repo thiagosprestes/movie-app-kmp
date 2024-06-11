@@ -25,9 +25,9 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.example.core.data.model.movieCredits.Cast
+import com.example.core.data.model.movieDetail.MovieDetailResponse
 import data.model.Movie.Movie
-import data.model.MovieCredits.Cast
-import data.model.MovieDetail.MovieDetailResponse
 import io.github.aakira.napier.Napier
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope

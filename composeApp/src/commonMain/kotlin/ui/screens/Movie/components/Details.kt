@@ -21,7 +21,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import data.model.MovieDetail.Genre
+import com.example.core.data.model.movieDetail.Genre
+import com.example.core.utils.DateTime
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import ui.components.RatingLevel
