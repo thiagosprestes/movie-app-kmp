@@ -26,11 +26,15 @@ kotlin {
     }
     
     sourceSets {
+        androidMain.dependencies {
+            implementation(libs.androidx.activity.compose)
+        }
         commonMain.dependencies {
             implementation(project(":core"))
             implementation(project(":network"))
             implementation(project(":home"))
             implementation(project(":movie"))
+            implementation(project(":search"))
             implementation(project(":navigation"))
         }
     }

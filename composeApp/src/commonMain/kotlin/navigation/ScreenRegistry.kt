@@ -1,3 +1,3 @@
-package ui.navigation
+package navigation
 
 expect fun screenRegistry(): Unit

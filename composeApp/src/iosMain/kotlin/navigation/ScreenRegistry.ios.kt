@@ -1,13 +1,12 @@
-package ui.navigation
+package navigation
 
 import cafe.adriel.voyager.core.registry.ScreenRegistry
 import com.example.home.navigation.homeNavModule
 import com.example.movie.navigation.movieNavModule
-import com.example.navigation.SharedScreen
-import ui.screens.Search.SearchScreen
+import com.example.search.navigation.searchNavModule
 
 actual fun screenRegistry() = ScreenRegistry {
-    register<SharedScreen.Search> { SearchScreen }
+    searchNavModule()
     movieNavModule()
     homeNavModule()
 }

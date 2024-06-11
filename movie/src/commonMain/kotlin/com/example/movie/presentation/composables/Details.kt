@@ -66,9 +66,10 @@ fun Details(
             Text(
                 title,
                 color = primaryWhite,
-                fontSize = 42.sp,
+                fontSize = 38.sp,
                 fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                lineHeight = 32.sp
             )
             Row {
                 LazyRow {

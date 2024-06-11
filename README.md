@@ -40,7 +40,7 @@ Os dados do app são provenientes da API pública do TMDB.
 - 🔐️ **Kotlinx serialization** — Desserialização de dados vindos da API.
 - 🕛 **Coroutines** — Chamadas assíncronas.
 - 📝 **Napier** — Logs da aplicação.
-- 🖼️ **Kamel** — Renderização de imagens vindas da API.
+- 🖼️ **Coil** — Renderização de imagens vindas da API.
 - 🗓️️ **Kotlinx** datetime — Formatação de datas.
 
 ## 🚀 Rodando o app
