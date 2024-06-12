@@ -3,9 +3,14 @@ package com.example.search.presentation
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
@@ -28,6 +33,7 @@ import com.example.core.presentation.composables.Loading
 import com.example.core.presentation.theme.backgroundGradient
 import com.example.core.presentation.theme.darkenRed
 import com.example.core.presentation.theme.primaryWhite
+import com.example.core.utils.windowInsetsPadding
 import com.example.search.presentation.composables.Default
 import kotlinx.coroutines.delay
 
@@ -54,6 +60,12 @@ object SearchScreen : Screen {
                 )
                 .fillMaxSize()
                 .padding(16.dp)
+                .windowInsetsPadding(
+                    WindowInsets.safeDrawing
+                        .only(WindowInsetsSides.Top)
+                        .asPaddingValues()
+                        .calculateTopPadding()
+                )
         ) {
             Row {
                 OutlinedTextField(

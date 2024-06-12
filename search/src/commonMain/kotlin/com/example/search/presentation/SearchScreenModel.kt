@@ -17,14 +17,16 @@ class SearchScreenModel(
         getSearchResultsUseCase(query).collectLatest { result ->
             when (result) {
                 is ApiResponse.Success -> {
-                    mutableState.update {
-                        if (result.data.isEmpty()) {
+                    if (result.data.isEmpty()) {
+                        mutableState.update {
                             it.copy(
                                 state = ScreenState.DEFAULT, isEmptyResult = true
                             )
-                            return@collectLatest
                         }
+                        return@collectLatest
+                    }
 
+                    mutableState.update {
                         it.copy(
                             state = ScreenState.DEFAULT,
                             results = result.data,

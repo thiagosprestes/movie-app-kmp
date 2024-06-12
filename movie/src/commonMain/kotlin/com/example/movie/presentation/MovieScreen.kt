@@ -3,8 +3,13 @@ package com.example.movie.presentation
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -17,6 +22,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.core.screen.uniqueScreenKey
 import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
@@ -25,12 +31,17 @@ import com.example.core.presentation.composables.Error
 import com.example.core.presentation.composables.Loading
 import com.example.core.presentation.theme.backgroundEnd
 import com.example.core.presentation.theme.primaryWhite
+import com.example.core.utils.windowInsetsPadding
 import com.example.movie.presentation.composables.Default
+import com.example.navigation.SharedScreen
+import com.example.navigation.utils.getScreenRegistry
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 data class MovieScreen(val id: Int) : Screen {
+    override val key = uniqueScreenKey
+
     @OptIn(DelicateCoroutinesApi::class)
     @Composable
     override fun Content() {
@@ -39,20 +50,16 @@ data class MovieScreen(val id: Int) : Screen {
 
         val navigator = LocalNavigator.currentOrThrow
 
-        suspend fun onGetData() {
-            screenModel.getDetails(id)
-            screenModel.getCast(id)
-            screenModel.getSimilar(id)
-        }
-
         fun onInit() {
             GlobalScope.launch {
-                onGetData()
+                screenModel.getDetails(id)
+                screenModel.getCast(id)
+                screenModel.getSimilar(id)
             }
         }
 
         LaunchedEffect(key1 = screenModel) {
-            onGetData()
+            onInit()
         }
 
         Column(Modifier.background(backgroundEnd).fillMaxSize()) {
@@ -65,11 +72,22 @@ data class MovieScreen(val id: Int) : Screen {
                             Default(
                                 movie = it,
                                 cast = state.cast,
-                                similar = state.similar
+                                similar = state.similar,
+                                onGoToMovie = { movieId ->
+                                    navigator.push(getScreenRegistry(SharedScreen.Movie(movieId)))
+                                }
                             )
                         }
                     }
-                    IconButton(onClick = { navigator.pop() }) {
+                    IconButton(
+                        modifier = Modifier.windowInsetsPadding(
+                            WindowInsets.safeDrawing
+                                .only(WindowInsetsSides.Top)
+                                .asPaddingValues()
+                                .calculateTopPadding()
+                        ),
+                        onClick = { navigator.pop() }
+                    ) {
                         Icon(
                             Icons.AutoMirrored.Filled.ArrowBack,
                             modifier = Modifier

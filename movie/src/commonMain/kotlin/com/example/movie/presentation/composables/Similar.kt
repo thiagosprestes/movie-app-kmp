@@ -23,18 +23,12 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.currentOrThrow
 import coil3.compose.AsyncImage
 import com.example.core.data.model.HomeMovie
 import com.example.core.presentation.theme.primaryWhite
-import com.example.navigation.SharedScreen
-import com.example.navigation.utils.getScreenRegistry
 
 @Composable
-fun Similar(similarMovies: List<HomeMovie>) {
-    val navigator = LocalNavigator.currentOrThrow
-
+fun Similar(similarMovies: List<HomeMovie>, onNavigateToMovie: (movieId: Int) -> Unit) {
     Text(
         "Filmes semelhantes",
         color = primaryWhite,
@@ -50,7 +44,7 @@ fun Similar(similarMovies: List<HomeMovie>) {
                     .height(243.dp)
                     .padding(end = 10.dp)
                     .clip(RoundedCornerShape(10.dp)).clickable {
-                        navigator.push(getScreenRegistry(SharedScreen.Movie(it.id)))
+                        onNavigateToMovie(it.id)
                     }
             ) {
                 AsyncImage(

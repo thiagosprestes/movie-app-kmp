@@ -16,7 +16,12 @@ import com.example.movie.data.model.MovieCast
 import com.example.movie.data.model.MovieDetail
 
 @Composable
-fun Default(movie: MovieDetail, cast: List<MovieCast>, similar: List<HomeMovie>) {
+fun Default(
+    movie: MovieDetail,
+    cast: List<MovieCast>,
+    similar: List<HomeMovie>,
+    onGoToMovie: (movieId: Int) -> Unit
+) {
     Column(Modifier.verticalScroll(rememberScrollState())) {
         Details(
             movie.backdropPath,
@@ -42,6 +47,6 @@ fun Default(movie: MovieDetail, cast: List<MovieCast>, similar: List<HomeMovie>)
             modifier = Modifier.padding(bottom = 30.dp).padding(horizontal = 16.dp)
         )
         Cast(cast)
-        Similar(similar)
+        Similar(similar, onGoToMovie)
     }
 }
