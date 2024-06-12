@@ -34,17 +34,28 @@ import com.example.navigation.SharedScreen
 import com.example.navigation.utils.getScreenRegistry
 
 @Composable
-fun Default(movies: List<HomeMovie>) {
+fun Default(movies: List<HomeMovie>, hasNoResultsFound: Boolean) {
     val navigator = LocalNavigator.currentOrThrow
 
     Column {
-        Text(
-            "Resultados",
-            color = primaryWhite,
-            fontSize = 16.sp,
-            fontWeight = FontWeight.SemiBold,
-            modifier = Modifier.padding(vertical = 16.dp)
-        )
+        if (hasNoResultsFound) {
+            Text(
+                text = "Nenhum resultado encontrado",
+                color = primaryWhite,
+                fontSize = 16.sp,
+                fontWeight = FontWeight.SemiBold,
+                modifier = Modifier.padding(vertical = 16.dp)
+            )
+        }
+        if (movies.isNotEmpty()) {
+            Text(
+                text = "Resultados",
+                color = primaryWhite,
+                fontSize = 16.sp,
+                fontWeight = FontWeight.SemiBold,
+                modifier = Modifier.padding(vertical = 16.dp)
+            )
+        }
         LazyVerticalStaggeredGrid(
             columns = StaggeredGridCells.Fixed(3),
             modifier = Modifier.fillMaxSize(),

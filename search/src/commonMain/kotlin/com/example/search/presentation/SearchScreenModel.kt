@@ -18,8 +18,17 @@ class SearchScreenModel(
             when (result) {
                 is ApiResponse.Success -> {
                     mutableState.update {
+                        if (result.data.isEmpty()) {
+                            it.copy(
+                                state = ScreenState.DEFAULT, isEmptyResult = true
+                            )
+                            return@collectLatest
+                        }
+
                         it.copy(
-                            state = ScreenState.DEFAULT, results = result.data
+                            state = ScreenState.DEFAULT,
+                            results = result.data,
+                            isEmptyResult = false
                         )
                     }
                 }

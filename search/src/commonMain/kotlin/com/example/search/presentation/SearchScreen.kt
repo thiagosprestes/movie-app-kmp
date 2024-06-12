@@ -86,7 +86,8 @@ object SearchScreen : Screen {
                 })
 
                 ScreenState.DEFAULT -> Default(
-                    movies = state.results
+                    movies = state.results,
+                    hasNoResultsFound = state.isEmptyResult
                 )
             }
         }

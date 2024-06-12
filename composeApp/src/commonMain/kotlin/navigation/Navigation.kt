@@ -27,6 +27,7 @@ import com.example.navigation.tabs.SearchTab
 fun Navigation() {
     TabNavigator(HomeTab) {
         Scaffold(
+//            modifier = Modifier.safeDrawingPadding(),
             bottomBar = {
                 BottomNavigation {
                     TabNavigationItem(HomeTab)
