@@ -11,6 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import di.initKoin
 import navigation.screenRegistry
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +22,10 @@ class MainActivity : ComponentActivity() {
             statusBarStyle = SystemBarStyle.dark(Color.TRANSPARENT)
         )
 
-        initKoin()
+        initKoin {
+            androidLogger()
+            androidContext(this@MainActivity)
+        }
         screenRegistry()
 
         setContent {

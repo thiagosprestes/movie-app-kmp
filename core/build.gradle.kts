@@ -30,6 +30,7 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.kotlinx.coroutines.android)
+            api(libs.koin.android)
         }
         commonMain.dependencies {
             api(compose.runtime)

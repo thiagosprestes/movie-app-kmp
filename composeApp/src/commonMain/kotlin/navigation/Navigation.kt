@@ -12,6 +12,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.navigator.tab.CurrentTab
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
@@ -20,21 +21,20 @@ import cafe.adriel.voyager.navigator.tab.TabNavigator
 import com.example.core.presentation.theme.bottomBar
 import com.example.core.presentation.theme.darkenRed
 import com.example.core.presentation.theme.primaryWhite
+import com.example.navigation.tabs.FavoritesTab
 import com.example.navigation.tabs.HomeTab
 import com.example.navigation.tabs.SearchTab
 
 @Composable
 fun Navigation() {
     TabNavigator(HomeTab) {
-        Scaffold(
-//            modifier = Modifier.safeDrawingPadding(),
-            bottomBar = {
-                BottomNavigation {
-                    TabNavigationItem(HomeTab)
-                    TabNavigationItem(SearchTab)
-                }
+        Scaffold(bottomBar = {
+            BottomNavigation {
+                TabNavigationItem(HomeTab)
+                TabNavigationItem(SearchTab)
+                TabNavigationItem(FavoritesTab)
             }
-        ) { padding ->
+        }) { padding ->
             Column(Modifier.padding(padding)) {
                 CurrentTab()
             }
@@ -46,19 +46,21 @@ fun Navigation() {
 private fun RowScope.TabNavigationItem(tab: Tab) {
     val tabNavigator = LocalTabNavigator.current
 
-    BottomNavigationItem(
-        selected = tabNavigator.current == tab,
+    BottomNavigationItem(selected = tabNavigator.current == tab,
         onClick = { tabNavigator.current = tab },
-        icon = { Icon(painter = tab.options.icon!!, contentDescription = tab.options.title) },
-        modifier = Modifier.background(bottomBar),
+        icon = {
+            tab.options.icon?.let {
+                Icon(
+                    painter = it, contentDescription = tab.options.title
+                )
+            }
+        },
+        modifier = Modifier.background(bottomBar).padding(bottom = 30.dp),
         selectedContentColor = darkenRed,
         unselectedContentColor = primaryWhite.copy(0.5F),
         label = {
             Text(
-                text = tab.options.title,
-                fontWeight = FontWeight.SemiBold,
-                fontSize = 10.sp
+                text = tab.options.title, fontWeight = FontWeight.SemiBold, fontSize = 10.sp
             )
-        }
-    )
+        })
 }

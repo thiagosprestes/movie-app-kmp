@@ -12,8 +12,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.core.data.model.HomeMovie
 import com.example.core.presentation.theme.primaryWhite
-import com.example.movie.data.model.MovieCast
-import com.example.movie.data.model.MovieDetail
+import com.example.movie.data.remote.model.MovieCast
+import com.example.movie.data.remote.model.MovieDetail
 
 @Composable
 fun Default(

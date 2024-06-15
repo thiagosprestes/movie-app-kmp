@@ -1,0 +1,17 @@
+CREATE TABLE Favorites (
+    id INTEGER NOT NULL PRIMARY KEY,
+    title TEXT NOT NULL,
+    posterPath TEXT
+);
+
+addFavorite:
+INSERT INTO Favorites (id, title, posterPath) VALUES (?, ?, ?);
+
+getFavorites:
+SELECT * FROM Favorites;
+
+isFavorite:
+SELECT * FROM Favorites WHERE id = ?;
+
+removeFavorite:
+DELETE FROM Favorites WHERE id = ?;

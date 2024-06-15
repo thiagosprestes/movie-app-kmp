@@ -14,7 +14,6 @@ class GetSearchResultsUseCase(
         val response = safeApiCall {
             repository.getSearchItems(query)
         }
-        println("AQUI2 $response")
         emit(response)
     }
 }

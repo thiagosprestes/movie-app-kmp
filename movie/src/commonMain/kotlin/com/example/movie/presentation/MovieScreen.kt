@@ -1,12 +1,15 @@
 package com.example.movie.presentation
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
@@ -15,11 +18,13 @@ import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.outlined.Star
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.core.screen.uniqueScreenKey
@@ -52,6 +57,7 @@ data class MovieScreen(val id: Int) : Screen {
 
         fun onInit() {
             GlobalScope.launch {
+                screenModel.verifyFavorite(id)
                 screenModel.getDetails(id)
                 screenModel.getCast(id)
                 screenModel.getSimilar(id)
@@ -79,23 +85,41 @@ data class MovieScreen(val id: Int) : Screen {
                             )
                         }
                     }
-                    IconButton(
-                        modifier = Modifier.windowInsetsPadding(
+                    Row(
+                        modifier = Modifier.fillMaxWidth().padding(16.dp).windowInsetsPadding(
                             WindowInsets.safeDrawing
                                 .only(WindowInsetsSides.Top)
                                 .asPaddingValues()
                                 .calculateTopPadding()
                         ),
-                        onClick = { navigator.pop() }
+                        horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Icon(
-                            Icons.AutoMirrored.Filled.ArrowBack,
-                            modifier = Modifier
-                                .padding(16.dp)
-                                .size(24.dp),
-                            tint = primaryWhite,
-                            contentDescription = null,
-                        )
+                        IconButton(
+                            onClick = { navigator.pop() }
+                        ) {
+                            Icon(
+                                Icons.AutoMirrored.Filled.ArrowBack,
+                                modifier = Modifier.size(24.dp),
+                                tint = primaryWhite,
+                                contentDescription = null,
+                            )
+                        }
+                        IconButton(
+                            onClick = {
+                                screenModel.toggleFavorite(
+                                    state.details?.id ?: 0,
+                                    state.details?.title ?: "",
+                                    state.details?.posterPath
+                                )
+                            }
+                        ) {
+                            Icon(
+                                Icons.Outlined.Star,
+                                modifier = Modifier.size(24.dp),
+                                tint = if (state.isFavorite) Color.Yellow else primaryWhite,
+                                contentDescription = null,
+                            )
+                        }
                     }
                 }
             }

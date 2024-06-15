@@ -46,15 +46,14 @@ fun MoviesList(
             title,
             color = primaryWhite,
             fontSize = 18.sp,
-            modifier = Modifier.padding(16.dp).padding(top = 24.dp)
+            modifier = Modifier.padding(start = 16.dp, top = 10.dp, bottom = 16.dp)
         )
         LazyRow(
             contentPadding = PaddingValues(
                 start = 16.dp, end = 6.dp
             )
         ) {
-            items(movies, key = { it.id }
-            ) {
+            items(movies, key = { it.id }) {
                 Box(
                     Modifier
                         .width(150.dp)

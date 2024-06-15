@@ -32,9 +32,11 @@ kotlin {
         commonMain.dependencies {
             implementation(project(":core"))
             implementation(project(":network"))
+            implementation(project(":database"))
             implementation(project(":home"))
             implementation(project(":movie"))
             implementation(project(":search"))
+            implementation(project(":favorites"))
             implementation(project(":navigation"))
         }
     }

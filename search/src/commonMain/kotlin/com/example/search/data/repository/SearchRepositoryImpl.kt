@@ -9,7 +9,6 @@ class SearchRepositoryImpl(
     private val dataSource: SearchDataSource
 ) : SearchRepository {
     override suspend fun getSearchItems(query: String): List<HomeMovie> {
-        println("AQUI $query")
         val response = dataSource.getSearchItems(query)
         return response.results.toMovie()
     }

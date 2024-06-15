@@ -31,6 +31,7 @@ kotlin {
 
             implementation(project(":core"))
             implementation(project(":network"))
+            implementation(project(":database"))
             implementation(project(":navigation"))
         }
         commonTest.dependencies {

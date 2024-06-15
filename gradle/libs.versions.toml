@@ -19,12 +19,16 @@ voyagerScreenmodel = "1.1.0-alpha04"
 ktor = "2.3.11"
 coroutines = "1.7.0"
 buildConfig = "5.3.5"
+sqldelight = "2.0.2"
 
 [libraries]
+sqldelight-ios = { module = "app.cash.sqldelight:native-driver", version.ref = "sqldelight" }
+sqldelight-android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqldelight" }
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilVersion" }
 coil-network-ktor = { module = "io.coil-kt.coil3:coil-network-ktor", version.ref = "coilVersion" }
 coil3-coil = { module = "io.coil-kt.coil3:coil", version.ref = "coilVersion" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinCore" }
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinCore" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
@@ -56,3 +60,4 @@ kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref =
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 buildConfig = { id = "com.github.gmazzo.buildconfig", version.ref = "buildConfig" }
+sqldelightDatabase = { id = "app.cash.sqldelight", version.ref = "sqldelight" }

@@ -1,19 +1,28 @@
 package com.example.movie.presentation
 
 import cafe.adriel.voyager.core.model.StateScreenModel
+import cafe.adriel.voyager.core.model.screenModelScope
 import com.example.core.data.model.ScreenState
-import com.example.movie.domain.usecase.GetMovieCastUseCase
-import com.example.movie.domain.usecase.GetMovieDetailsUseCase
-import com.example.movie.domain.usecase.GetSimilarMoviesUseCase
+import com.example.database.model.DatabaseResponse
+import com.example.movie.domain.local.usecase.AddFavoriteUseCase
+import com.example.movie.domain.local.usecase.RemoveFavoriteUseCase
+import com.example.movie.domain.local.usecase.VerifyFavoriteUseCase
+import com.example.movie.domain.remote.usecase.GetMovieCastUseCase
+import com.example.movie.domain.remote.usecase.GetMovieDetailsUseCase
+import com.example.movie.domain.remote.usecase.GetSimilarMoviesUseCase
 import com.example.movie.presentation.model.MovieState
 import com.example.network.utils.ApiResponse
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 class MovieScreenModel(
     private val getMovieDetailsUseCase: GetMovieDetailsUseCase,
     private val getMovieCastUseCase: GetMovieCastUseCase,
-    private val getSimilarMoviesUseCase: GetSimilarMoviesUseCase
+    private val getSimilarMoviesUseCase: GetSimilarMoviesUseCase,
+    private val verifyFavoriteUseCase: VerifyFavoriteUseCase,
+    private val addFavoriteUseCase: AddFavoriteUseCase,
+    private val removeFavoriteUseCase: RemoveFavoriteUseCase
 ) : StateScreenModel<MovieState>(MovieState()) {
     suspend fun getDetails(id: Int) {
         getMovieDetailsUseCase(id).collectLatest { result ->
@@ -21,8 +30,7 @@ class MovieScreenModel(
                 is ApiResponse.Success -> {
                     mutableState.update {
                         it.copy(
-                            state = ScreenState.DEFAULT,
-                            details = result.data
+                            state = ScreenState.DEFAULT, details = result.data
                         )
                     }
                 }
@@ -50,8 +58,7 @@ class MovieScreenModel(
                 is ApiResponse.Success -> {
                     mutableState.update {
                         it.copy(
-                            state = ScreenState.DEFAULT,
-                            cast = result.data
+                            state = ScreenState.DEFAULT, cast = result.data
                         )
                     }
                 }
@@ -79,8 +86,7 @@ class MovieScreenModel(
                 is ApiResponse.Success -> {
                     mutableState.update {
                         it.copy(
-                            state = ScreenState.DEFAULT,
-                            similar = result.data
+                            state = ScreenState.DEFAULT, similar = result.data
                         )
                     }
                 }
@@ -98,6 +104,59 @@ class MovieScreenModel(
                         )
                     }
                 }
+            }
+        }
+    }
+
+    suspend fun verifyFavorite(id: Int) {
+        verifyFavoriteUseCase(id).collectLatest { result ->
+            when (result) {
+                is DatabaseResponse.Success -> {
+                    mutableState.update {
+                        it.copy(
+                            state = ScreenState.DEFAULT,
+                            isFavorite = result.data
+                        )
+                    }
+                }
+
+                is DatabaseResponse.Error -> {
+                    mutableState.update {
+                        it.copy(
+                            state = ScreenState.ERROR,
+                            isFavorite = false
+                        )
+                    }
+                }
+
+                is DatabaseResponse.Loading -> {
+                    mutableState.update {
+                        it.copy(
+                            state = ScreenState.LOADING
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    fun toggleFavorite(id: Int, title: String, posterPath: String?) = screenModelScope.launch {
+        if (!mutableState.value.isFavorite) {
+            addFavoriteUseCase(id, title, posterPath).collectLatest {
+                mutableState.update {
+                    it.copy(
+                        isFavorite = true
+                    )
+                }
+            }
+            return@launch
+        }
+
+        removeFavoriteUseCase(id).collectLatest {
+            mutableState.update {
+                it.copy(
+                    isFavorite = false
+                )
             }
         }
     }

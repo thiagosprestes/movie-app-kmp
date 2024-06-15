@@ -66,7 +66,7 @@ fun CarouselItem(movie: HomeMovie) {
     Box(
         Modifier
             .height(190.dp)
-            .width(320.dp)
+            .width(400.dp)
             .clip(RoundedCornerShape(10.dp))
             .clickable {
                 navigator.push(getScreenRegistry(SharedScreen.Movie(movie.id)))

@@ -27,7 +27,6 @@ class HomeScreenModel(
     }
 
     private suspend fun getNowPlaying() {
-
         getNowPlayingUseCase().collectLatest { response ->
             when (response) {
                 is ApiResponse.Loading -> {

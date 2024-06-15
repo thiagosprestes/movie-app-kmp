@@ -1,5 +1,6 @@
 package di
 
+import com.example.favorites.di.favoritesModule
 import com.example.home.di.homeModule
 import com.example.movie.di.movieModule
 import com.example.network.di.networkModule
@@ -10,5 +11,7 @@ fun appModule() =
         networkModule,
         homeModule,
         movieModule,
-        searchModule
+        searchModule,
+        favoritesModule,
+        nativeModules
     )
