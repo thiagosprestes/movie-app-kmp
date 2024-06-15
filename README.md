@@ -41,7 +41,8 @@ Os dados do app são provenientes da API pública do TMDB.
 - 🕛 **Coroutines** — Chamadas assíncronas.
 - 📝 **Napier** — Logs da aplicação.
 - 🖼️ **Coil** — Renderização de imagens vindas da API.
-- 🗓️️ **Kotlinx** datetime — Formatação de datas.
+- 🗓️️ **Kotlinx datetime** — Formatação de datas.
+- 🎲 **SQLdelight** - Base de dados
 
 ## 🚀 Rodando o app
 
