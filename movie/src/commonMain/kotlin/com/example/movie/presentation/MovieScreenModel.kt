@@ -1,15 +1,15 @@
 package com.example.movie.presentation
 
+import androidx.compose.ui.graphics.Color
 import cafe.adriel.voyager.core.model.StateScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
 import com.example.core.data.model.ScreenState
-import com.example.database.model.DatabaseResponse
-import com.example.movie.domain.local.usecase.AddFavoriteUseCase
-import com.example.movie.domain.local.usecase.RemoveFavoriteUseCase
-import com.example.movie.domain.local.usecase.VerifyFavoriteUseCase
-import com.example.movie.domain.remote.usecase.GetMovieCastUseCase
-import com.example.movie.domain.remote.usecase.GetMovieDetailsUseCase
-import com.example.movie.domain.remote.usecase.GetSimilarMoviesUseCase
+import com.example.core.presentation.theme.primaryWhite
+import com.example.movie.domain.local.model.FavoriteMovie
+import com.example.movie.domain.local.useCase.AddFavoriteUseCase
+import com.example.movie.domain.local.useCase.RemoveFavoriteUseCase
+import com.example.movie.domain.remote.model.Movie
+import com.example.movie.domain.remote.useCase.GetMovieUseCase
 import com.example.movie.presentation.model.MovieState
 import com.example.network.utils.ApiResponse
 import kotlinx.coroutines.flow.collectLatest
@@ -17,147 +17,87 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class MovieScreenModel(
-    private val getMovieDetailsUseCase: GetMovieDetailsUseCase,
-    private val getMovieCastUseCase: GetMovieCastUseCase,
-    private val getSimilarMoviesUseCase: GetSimilarMoviesUseCase,
-    private val verifyFavoriteUseCase: VerifyFavoriteUseCase,
+    private val getMovieUseCase: GetMovieUseCase,
     private val addFavoriteUseCase: AddFavoriteUseCase,
     private val removeFavoriteUseCase: RemoveFavoriteUseCase
 ) : StateScreenModel<MovieState>(MovieState()) {
-    suspend fun getDetails(id: Int) {
-        getMovieDetailsUseCase(id).collectLatest { result ->
+    private fun setSuccessState(movie: Movie) = mutableState.update {
+        val starColor = when {
+            movie.isFavorite -> Color.Yellow
+            else -> primaryWhite
+        }
+
+        it.copy(
+            id = movie.details?.id ?: 0,
+            state = ScreenState.DEFAULT,
+            details = movie.details,
+            cast = movie.cast,
+            similar = movie.similar,
+            isFavorite = movie.isFavorite,
+            starColor = starColor,
+        )
+    }
+
+    private fun setLoadingState() = mutableState.update {
+        it.copy(
+            state = ScreenState.LOADING
+        )
+    }
+
+    private fun setErrorState() = mutableState.update {
+        it.copy(
+            state = ScreenState.ERROR
+        )
+    }
+
+    private fun getMovie(id: Long) = screenModelScope.launch {
+        getMovieUseCase(id).collectLatest { result ->
             when (result) {
-                is ApiResponse.Success -> {
-                    mutableState.update {
-                        it.copy(
-                            state = ScreenState.DEFAULT, details = result.data
-                        )
-                    }
-                }
-
-                is ApiResponse.Error -> mutableState.update {
-                    it.copy(
-                        state = ScreenState.ERROR,
-                    )
-                }
-
-                is ApiResponse.Loading -> {
-                    mutableState.update {
-                        it.copy(
-                            state = ScreenState.LOADING
-                        )
-                    }
-                }
+                is ApiResponse.Success -> setSuccessState(result.data)
+                is ApiResponse.Error -> setErrorState()
+                is ApiResponse.Loading -> setLoadingState()
             }
         }
     }
 
-    suspend fun getCast(id: Int) {
-        getMovieCastUseCase(id).collectLatest { result ->
-            when (result) {
-                is ApiResponse.Success -> {
-                    mutableState.update {
-                        it.copy(
-                            state = ScreenState.DEFAULT, cast = result.data
-                        )
-                    }
-                }
+    private fun handleOnRemoveFavorite() = screenModelScope.launch {
+        val movie = mutableState.value
 
-                is ApiResponse.Error -> mutableState.update {
-                    it.copy(
-                        state = ScreenState.ERROR,
-                    )
-                }
-
-                is ApiResponse.Loading -> {
-                    mutableState.update {
-                        it.copy(
-                            state = ScreenState.LOADING
-                        )
-                    }
-                }
-            }
-        }
-    }
-
-    suspend fun getSimilar(id: Int) {
-        getSimilarMoviesUseCase(id).collectLatest { result ->
-            when (result) {
-                is ApiResponse.Success -> {
-                    mutableState.update {
-                        it.copy(
-                            state = ScreenState.DEFAULT, similar = result.data
-                        )
-                    }
-                }
-
-                is ApiResponse.Error -> mutableState.update {
-                    it.copy(
-                        state = ScreenState.ERROR,
-                    )
-                }
-
-                is ApiResponse.Loading -> {
-                    mutableState.update {
-                        it.copy(
-                            state = ScreenState.LOADING
-                        )
-                    }
-                }
-            }
-        }
-    }
-
-    suspend fun verifyFavorite(id: Int) {
-        verifyFavoriteUseCase(id).collectLatest { result ->
-            when (result) {
-                is DatabaseResponse.Success -> {
-                    mutableState.update {
-                        it.copy(
-                            state = ScreenState.DEFAULT,
-                            isFavorite = result.data
-                        )
-                    }
-                }
-
-                is DatabaseResponse.Error -> {
-                    mutableState.update {
-                        it.copy(
-                            state = ScreenState.ERROR,
-                            isFavorite = false
-                        )
-                    }
-                }
-
-                is DatabaseResponse.Loading -> {
-                    mutableState.update {
-                        it.copy(
-                            state = ScreenState.LOADING
-                        )
-                    }
-                }
-            }
-        }
-    }
-
-    fun toggleFavorite(id: Int, title: String, posterPath: String?) = screenModelScope.launch {
-        if (!mutableState.value.isFavorite) {
-            addFavoriteUseCase(id, title, posterPath).collectLatest {
-                mutableState.update {
-                    it.copy(
-                        isFavorite = true
-                    )
-                }
-            }
-            return@launch
-        }
-
-        removeFavoriteUseCase(id).collectLatest {
+        removeFavoriteUseCase(movie.id).collectLatest {
             mutableState.update {
                 it.copy(
                     isFavorite = false
                 )
             }
         }
+    }
+
+    private fun handleOnAddFavorite() =
+        screenModelScope.launch {
+            val movie = mutableState.value
+
+            addFavoriteUseCase(
+                movie = FavoriteMovie(
+                    id = movie.id,
+                    title = movie.details?.title.orEmpty(),
+                    posterPath = movie.details?.posterPath.orEmpty()
+                )
+            ).collectLatest {
+                mutableState.update {
+                    it.copy(
+                        isFavorite = true
+                    )
+                }
+            }
+        }
+
+    private fun toggleFavorite() = when {
+        mutableState.value.isFavorite -> handleOnRemoveFavorite()
+        else -> handleOnAddFavorite()
+    }
+
+    internal fun handleAction(action: MovieScreenActions) = when (action) {
+        is OnInitMovieScreen -> getMovie(action.id)
+        is OnToggleFavoriteMovie -> toggleFavorite()
     }
 }

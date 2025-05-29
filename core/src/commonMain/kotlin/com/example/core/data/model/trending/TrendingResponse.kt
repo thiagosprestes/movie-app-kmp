@@ -1,7 +1,7 @@
 package com.example.core.data.model.trending
 
 
-import data.model.Movie.Movie
+import com.example.core.data.model.movie.Movie
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

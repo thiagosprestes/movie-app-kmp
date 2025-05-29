@@ -12,15 +12,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.core.data.model.HomeMovie
 import com.example.core.presentation.theme.primaryWhite
-import com.example.movie.data.remote.model.MovieCast
-import com.example.movie.data.remote.model.MovieDetail
+import com.example.movie.domain.remote.model.MovieCast
+import com.example.movie.domain.remote.model.MovieDetail
 
 @Composable
 fun Default(
     movie: MovieDetail,
     cast: List<MovieCast>,
     similar: List<HomeMovie>,
-    onGoToMovie: (movieId: Int) -> Unit
+    onGoToMovie: (movieId: Long) -> Unit
 ) {
     Column(Modifier.verticalScroll(rememberScrollState())) {
         Details(

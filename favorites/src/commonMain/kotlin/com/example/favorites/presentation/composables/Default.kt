@@ -40,7 +40,7 @@ import com.example.favorites.data.model.FavoriteMovie
 @Composable
 fun Default(
     favorites: List<FavoriteMovie>,
-    onNavigate: (Int) -> Unit
+    onNavigate: (Long) -> Unit
 ) {
     Column(
         Modifier

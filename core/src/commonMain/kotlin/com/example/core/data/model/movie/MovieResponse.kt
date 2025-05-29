@@ -1,7 +1,5 @@
-package data.model.Movie
+package com.example.core.data.model.movie
 
-
-import com.example.core.data.model.movie.Dates
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

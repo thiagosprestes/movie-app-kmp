@@ -1,4 +1,4 @@
-package data.model.Movie
+package com.example.core.data.model.movie
 
 
 import kotlinx.serialization.SerialName
@@ -13,7 +13,7 @@ data class Movie(
     @SerialName("genre_ids")
     val genreIds: List<Int>,
     @SerialName("id")
-    val id: Int,
+    val id: Long,
     @SerialName("original_language")
     val originalLanguage: String,
     @SerialName("original_title")

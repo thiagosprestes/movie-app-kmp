@@ -10,18 +10,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 
+const val NUM_OF_STARS = 5
+
 @Composable
 fun RatingLevel(level: Double, starSize: Dp) {
-    val numOfStars = 5
+    fun hasFilledStar(item: Int): Boolean = item <= (level * NUM_OF_STARS) / 10
 
-    fun renderRating(item: Int): Boolean = item <= (level * numOfStars) / 10
+    fun tint(rate: Int): Color = when {
+        hasFilledStar(rate) -> Color.Yellow
+        else -> Color.Gray
+    }
 
     LazyRow {
-        items(numOfStars, key = { it }) {
+        items(NUM_OF_STARS, key = { it }) {
             Icon(
                 Icons.Filled.Star,
                 modifier = Modifier.size(starSize),
-                tint = if (renderRating(it)) Color.Yellow else Color.Gray,
+                tint = tint(it),
                 contentDescription = null
             )
         }

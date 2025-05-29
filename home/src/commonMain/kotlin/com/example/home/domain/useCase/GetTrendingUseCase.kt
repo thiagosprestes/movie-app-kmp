@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.flow
 class GetTrendingUseCase(
     private val repository: HomeRepository
 ) {
-    suspend operator fun invoke(): Flow<ApiResponse<List<HomeMovie>>> = flow {
+    operator fun invoke(): Flow<ApiResponse<List<HomeMovie>>> = flow {
         val response = safeApiCall {
             repository.getTrending()
         }

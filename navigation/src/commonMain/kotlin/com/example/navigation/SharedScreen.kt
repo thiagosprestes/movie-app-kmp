@@ -6,5 +6,5 @@ sealed class SharedScreen : ScreenProvider {
     object Home : SharedScreen()
     object Search : SharedScreen()
     object Favorites : SharedScreen()
-    data class Movie(val movieId: Int) : SharedScreen()
+    data class Movie(val movieId: Long) : SharedScreen()
 }

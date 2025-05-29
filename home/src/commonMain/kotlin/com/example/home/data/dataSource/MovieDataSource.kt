@@ -1,6 +1,6 @@
 package com.example.home.data.dataSource
 
-import data.model.Movie.MovieResponse
+import com.example.core.data.model.movie.MovieResponse
 
 interface MovieDataSource {
     suspend fun getNowPlaying(): MovieResponse

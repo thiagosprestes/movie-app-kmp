@@ -63,7 +63,6 @@ android {
 }
 
 buildConfig {
-    val apiKey = gradleLocalProperties(rootDir).getProperty("API_KEY")
-
+    val apiKey = gradleLocalProperties(rootDir, providers).getProperty("API_KEY")
     buildConfigField("String", "API_KEY", apiKey)
 }

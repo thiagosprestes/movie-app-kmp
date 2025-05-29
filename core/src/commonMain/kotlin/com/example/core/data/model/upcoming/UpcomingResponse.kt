@@ -1,7 +1,7 @@
-package com.example.core.data.model.Upcoming
+package com.example.core.data.model.upcoming
 
 import com.example.core.data.model.movie.Dates
-import data.model.Movie.Movie
+import com.example.core.data.model.movie.Movie
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

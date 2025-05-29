@@ -24,7 +24,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.core.screen.uniqueScreenKey
@@ -41,10 +40,8 @@ import com.example.movie.presentation.composables.Default
 import com.example.navigation.SharedScreen
 import com.example.navigation.utils.getScreenRegistry
 import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
-data class MovieScreen(val id: Int) : Screen {
+data class MovieScreen(val id: Long) : Screen {
     override val key = uniqueScreenKey
 
     @OptIn(DelicateCoroutinesApi::class)
@@ -55,17 +52,8 @@ data class MovieScreen(val id: Int) : Screen {
 
         val navigator = LocalNavigator.currentOrThrow
 
-        fun onInit() {
-            GlobalScope.launch {
-                screenModel.verifyFavorite(id)
-                screenModel.getDetails(id)
-                screenModel.getCast(id)
-                screenModel.getSimilar(id)
-            }
-        }
-
         LaunchedEffect(key1 = screenModel) {
-            onInit()
+            screenModel::handleAction.invoke(OnInitMovieScreen(id))
         }
 
         Column(Modifier.background(backgroundEnd).fillMaxSize()) {
@@ -73,7 +61,10 @@ data class MovieScreen(val id: Int) : Screen {
                 Box {
                     when (state.state) {
                         ScreenState.LOADING -> Loading()
-                        ScreenState.ERROR -> Error(onRetry = { onInit() })
+                        ScreenState.ERROR -> Error(onRetry = {
+                            screenModel::handleAction.invoke(OnInitMovieScreen(id))
+                        })
+
                         ScreenState.DEFAULT -> state.details?.let {
                             Default(
                                 movie = it,
@@ -104,21 +95,17 @@ data class MovieScreen(val id: Int) : Screen {
                                 contentDescription = null,
                             )
                         }
-                        IconButton(
-                            onClick = {
-                                screenModel.toggleFavorite(
-                                    state.details?.id ?: 0,
-                                    state.details?.title ?: "",
-                                    state.details?.posterPath
+                        if (state.state == ScreenState.DEFAULT) {
+                            IconButton(
+                                onClick = { screenModel::handleAction.invoke(OnToggleFavoriteMovie) }
+                            ) {
+                                Icon(
+                                    Icons.Outlined.Star,
+                                    modifier = Modifier.size(24.dp),
+                                    tint = state.starColor,
+                                    contentDescription = null,
                                 )
                             }
-                        ) {
-                            Icon(
-                                Icons.Outlined.Star,
-                                modifier = Modifier.size(24.dp),
-                                tint = if (state.isFavorite) Color.Yellow else primaryWhite,
-                                contentDescription = null,
-                            )
                         }
                     }
                 }
