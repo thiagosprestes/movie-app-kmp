@@ -2,7 +2,7 @@ package com.example.movie.domain.remote.mapper
 
 import com.example.core.data.model.movieDetail.MovieDetailResponse
 import com.example.core.domain.mapper.toUrl
-import com.example.movie.data.remote.model.MovieDetail
+import com.example.movie.domain.remote.model.MovieDetail
 
 fun MovieDetailResponse.toMovieDetail() = MovieDetail(
     id = this.id,

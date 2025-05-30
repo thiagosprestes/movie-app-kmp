@@ -28,7 +28,7 @@ import com.example.core.data.model.HomeMovie
 import com.example.core.presentation.theme.primaryWhite
 
 @Composable
-fun Similar(similarMovies: List<HomeMovie>, onNavigateToMovie: (movieId: Int) -> Unit) {
+fun Similar(similarMovies: List<HomeMovie>, onNavigateToMovie: (movieId: Long) -> Unit) {
     Text(
         "Filmes semelhantes",
         color = primaryWhite,

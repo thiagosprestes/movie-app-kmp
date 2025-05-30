@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.example.core.presentation.theme.primaryWhite
-import com.example.movie.data.remote.model.MovieCast
+import com.example.movie.domain.remote.model.MovieCast
 
 @Composable
 fun Cast(cast: List<MovieCast>) {

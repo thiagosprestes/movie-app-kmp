@@ -17,7 +17,7 @@ data class MovieDetailResponse(
     @SerialName("homepage")
     val homepage: String,
     @SerialName("id")
-    val id: Int,
+    val id: Long,
     @SerialName("imdb_id")
     val imdbId: String,
     @SerialName("original_language")

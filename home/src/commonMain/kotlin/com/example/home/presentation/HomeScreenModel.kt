@@ -17,13 +17,8 @@ class HomeScreenModel(
     private val getTrendingUseCase: GetTrendingUseCase,
     private val getUpcomingUseCase: GetUpcomingUseCase,
 ) : StateScreenModel<HomeState>(HomeState()) {
-
     init {
-        screenModelScope.launch {
-            getNowPlaying()
-            getTrending()
-            getUpcoming()
-        }
+        onInit()
     }
 
     private suspend fun getNowPlaying() {
@@ -107,7 +102,7 @@ class HomeScreenModel(
         }
     }
 
-    fun handleOnRetry() {
+    fun onInit() {
         screenModelScope.launch {
             getNowPlaying()
             getTrending()

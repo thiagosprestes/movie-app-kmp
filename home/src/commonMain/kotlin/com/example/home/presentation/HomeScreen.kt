@@ -19,7 +19,7 @@ object HomeScreen : Screen {
 
         when (screenState) {
             ScreenState.LOADING -> Loading()
-            ScreenState.ERROR -> Error(onRetry = { screenModel.handleOnRetry() })
+            ScreenState.ERROR -> Error(onRetry = { screenModel.onInit() })
             ScreenState.DEFAULT -> Default(
                 nowPlaying = state.nowPlayingMovies,
                 trending = state.trendingMovies,

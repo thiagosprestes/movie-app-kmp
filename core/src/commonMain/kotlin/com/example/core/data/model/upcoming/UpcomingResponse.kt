@@ -1,12 +1,14 @@
-package com.example.core.data.model.trending
+package com.example.core.data.model.upcoming
 
-
+import com.example.core.data.model.movie.Dates
 import com.example.core.data.model.movie.Movie
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class TrendingResponse(
+data class UpcomingResponse(
+    @SerialName("dates")
+    val dates: Dates,
     @SerialName("page")
     val page: Int,
     @SerialName("results")

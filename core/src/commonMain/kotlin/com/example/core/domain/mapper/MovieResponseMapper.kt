@@ -1,7 +1,7 @@
 package com.example.core.domain.mapper
 
 import com.example.core.data.model.HomeMovie
-import data.model.Movie.Movie
+import com.example.core.data.model.movie.Movie
 
 fun List<Movie>.toMovie(): List<HomeMovie> = map {
     HomeMovie(

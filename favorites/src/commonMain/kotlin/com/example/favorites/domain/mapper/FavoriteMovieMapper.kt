@@ -5,7 +5,7 @@ import com.example.favorites.data.model.FavoriteMovie
 
 fun List<Favorites>.toFavoriteMovie() = map {
     FavoriteMovie(
-        id = it.id.toInt(),
+        id = it.id,
         posterPath = it.posterPath,
         title = it.title
     )
