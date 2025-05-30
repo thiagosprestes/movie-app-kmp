@@ -1,4 +1,4 @@
-package com.example.movie.presentation.composables
+package com.example.movie.presentation.composables.defaultState
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -28,9 +28,13 @@ import com.example.core.data.model.HomeMovie
 import com.example.core.presentation.theme.primaryWhite
 
 @Composable
-fun Similar(similarMovies: List<HomeMovie>, onNavigateToMovie: (movieId: Long) -> Unit) {
+fun movieScreenSimilar(
+    title: String,
+    similarMovies: List<HomeMovie>,
+    onNavigateToMovie: (movieId: Long) -> Unit
+) {
     Text(
-        "Filmes semelhantes",
+        title,
         color = primaryWhite,
         fontSize = 18.sp,
         fontWeight = FontWeight.SemiBold,

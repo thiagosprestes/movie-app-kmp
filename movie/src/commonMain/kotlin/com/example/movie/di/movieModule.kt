@@ -6,7 +6,9 @@ import com.example.movie.data.remote.datasource.MovieDataSourceImpl
 import com.example.movie.data.remote.repository.MovieRepositoryImpl
 import com.example.movie.domain.local.repository.FavoritesRepository
 import com.example.movie.domain.local.useCase.AddFavoriteUseCase
+import com.example.movie.domain.local.useCase.AddFavoriteUseCaseImpl
 import com.example.movie.domain.local.useCase.RemoveFavoriteUseCase
+import com.example.movie.domain.local.useCase.RemoveFavoriteUseCaseImpl
 import com.example.movie.domain.remote.repository.MovieRepository
 import com.example.movie.domain.remote.useCase.GetMovieUseCase
 import com.example.movie.domain.remote.useCase.GetMovieUseCaseImpl
@@ -23,8 +25,8 @@ val movieModule = module {
             favoritesRepository = get(),
         )
     }
-    single { AddFavoriteUseCase(get()) }
-    single { RemoveFavoriteUseCase(get()) }
+    single<AddFavoriteUseCase> { AddFavoriteUseCaseImpl(get()) }
+    single<RemoveFavoriteUseCase> { RemoveFavoriteUseCaseImpl(get()) }
     factory {
         MovieScreenModel(
             getMovieUseCase = get(),
