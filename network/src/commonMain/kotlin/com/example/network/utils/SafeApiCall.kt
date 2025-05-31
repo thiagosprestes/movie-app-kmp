@@ -1,16 +1,17 @@
 package com.example.network.utils
 
-import com.example.network.utils.ApiResponse
 import io.github.aakira.napier.Napier
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
-suspend fun <T> safeApiCall(apiCall: suspend () -> T): ApiResponse<T> {
-    return try {
-        ApiResponse.Loading
-        val response = apiCall.invoke()
+fun <T> safeApiCall(apiCall: suspend () -> T): Flow<ApiResponse<T>> = flow {
+    emit(ApiResponse.Loading)
+    try {
+        val response = apiCall()
         Napier.i("Success on get api data")
-        ApiResponse.Success(response)
+        emit(ApiResponse.Success(response))
     } catch (e: Exception) {
         Napier.e("Error on get api data", e)
-        ApiResponse.Error(e.toString())
+        emit(ApiResponse.Error(e.message ?: "Erro desconhecido"))
     }
 }
