@@ -1,4 +1,4 @@
-package com.example.movie.presentation.composables
+package com.example.movie.presentation.composables.defaultState
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -21,9 +21,12 @@ import com.example.core.presentation.theme.primaryWhite
 import com.example.movie.domain.remote.model.MovieCast
 
 @Composable
-fun Cast(cast: List<MovieCast>) {
+fun movieScreenCast(
+    title: String,
+    cast: List<MovieCast>
+) {
     Text(
-        "Elenco",
+        title,
         color = primaryWhite,
         fontSize = 18.sp,
         fontWeight = FontWeight.SemiBold,

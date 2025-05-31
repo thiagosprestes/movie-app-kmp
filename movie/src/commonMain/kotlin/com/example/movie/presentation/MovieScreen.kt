@@ -1,30 +1,14 @@
 package com.example.movie.presentation
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.WindowInsetsSides
-import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.only
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawing
-import androidx.compose.foundation.layout.size
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.outlined.Star
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.core.screen.uniqueScreenKey
 import cafe.adriel.voyager.koin.koinScreenModel
@@ -34,17 +18,15 @@ import com.example.core.data.model.ScreenState
 import com.example.core.presentation.composables.Error
 import com.example.core.presentation.composables.Loading
 import com.example.core.presentation.theme.backgroundEnd
-import com.example.core.presentation.theme.primaryWhite
-import com.example.core.utils.windowInsetsPadding
-import com.example.movie.presentation.composables.Default
+import com.example.movie.presentation.composables.defaultState.MovieScreenDefaultStateParams
+import com.example.movie.presentation.composables.defaultState.movieScreenDefaultState
+import com.example.movie.presentation.composables.movieScreenHeader
 import com.example.navigation.SharedScreen
 import com.example.navigation.utils.getScreenRegistry
-import kotlinx.coroutines.DelicateCoroutinesApi
 
 data class MovieScreen(val id: Long) : Screen {
     override val key = uniqueScreenKey
 
-    @OptIn(DelicateCoroutinesApi::class)
     @Composable
     override fun Content() {
         val screenModel = koinScreenModel<MovieScreenModel>()
@@ -61,52 +43,29 @@ data class MovieScreen(val id: Long) : Screen {
                 Box {
                     when (state.state) {
                         ScreenState.LOADING -> Loading()
-                        ScreenState.ERROR -> Error(onRetry = {
+                        ScreenState.ERROR -> Error {
                             screenModel::handleAction.invoke(OnInitMovieScreen(id))
-                        })
+                        }
 
-                        ScreenState.DEFAULT -> state.details?.let {
-                            Default(
-                                movie = it,
-                                cast = state.cast,
+                        ScreenState.DEFAULT -> movieScreenDefaultState(
+                            params = MovieScreenDefaultStateParams(
+                                header = state.header,
+                                details = state.details,
+                                casting = state.casting,
                                 similar = state.similar,
-                                onGoToMovie = { movieId ->
-                                    navigator.push(getScreenRegistry(SharedScreen.Movie(movieId)))
-                                }
-                            )
-                        }
-                    }
-                    Row(
-                        modifier = Modifier.fillMaxWidth().padding(16.dp).windowInsetsPadding(
-                            WindowInsets.safeDrawing
-                                .only(WindowInsetsSides.Top)
-                                .asPaddingValues()
-                                .calculateTopPadding()
-                        ),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        IconButton(
-                            onClick = { navigator.pop() }
-                        ) {
-                            Icon(
-                                Icons.AutoMirrored.Filled.ArrowBack,
-                                modifier = Modifier.size(24.dp),
-                                tint = primaryWhite,
-                                contentDescription = null,
-                            )
-                        }
-                        if (state.state == ScreenState.DEFAULT) {
-                            IconButton(
-                                onClick = { screenModel::handleAction.invoke(OnToggleFavoriteMovie) }
-                            ) {
-                                Icon(
-                                    Icons.Outlined.Star,
-                                    modifier = Modifier.size(24.dp),
-                                    tint = state.starColor,
-                                    contentDescription = null,
-                                )
+                            ) { movieId ->
+                                navigator.push(getScreenRegistry(SharedScreen.Movie(movieId)))
                             }
-                        }
+                        )
+                    }
+                    movieScreenHeader(
+                        isDefaultState = state.state == ScreenState.DEFAULT,
+                        starColor = state.header.starColor,
+                        onGoBack = { navigator.pop() },
+                    ) {
+                        screenModel::handleAction.invoke(
+                            OnToggleFavoriteMovie
+                        )
                     }
                 }
             }

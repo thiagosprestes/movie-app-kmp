@@ -1,10 +1,8 @@
 package com.example.movie.presentation
 
-import androidx.compose.ui.graphics.Color
 import cafe.adriel.voyager.core.model.StateScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
 import com.example.core.data.model.ScreenState
-import com.example.core.presentation.theme.primaryWhite
 import com.example.movie.domain.local.model.FavoriteMovie
 import com.example.movie.domain.local.useCase.AddFavoriteUseCase
 import com.example.movie.domain.local.useCase.RemoveFavoriteUseCase
@@ -19,22 +17,17 @@ import kotlinx.coroutines.launch
 class MovieScreenModel(
     private val getMovieUseCase: GetMovieUseCase,
     private val addFavoriteUseCase: AddFavoriteUseCase,
-    private val removeFavoriteUseCase: RemoveFavoriteUseCase
+    private val removeFavoriteUseCase: RemoveFavoriteUseCase,
 ) : StateScreenModel<MovieState>(MovieState()) {
-    private fun setSuccessState(movie: Movie) = mutableState.update {
-        val starColor = when {
-            movie.isFavorite -> Color.Yellow
-            else -> primaryWhite
-        }
 
+    private fun setSuccessState(movie: Movie) = mutableState.update {
         it.copy(
-            id = movie.details?.id ?: 0,
             state = ScreenState.DEFAULT,
+            id = movie.id,
+            header = movie.header,
             details = movie.details,
-            cast = movie.cast,
+            casting = movie.casting,
             similar = movie.similar,
-            isFavorite = movie.isFavorite,
-            starColor = starColor,
         )
     }
 
@@ -66,7 +59,9 @@ class MovieScreenModel(
         removeFavoriteUseCase(movie.id).collectLatest {
             mutableState.update {
                 it.copy(
-                    isFavorite = false
+                    header = movie.header.copy(
+                        isFavorite = false
+                    )
                 )
             }
         }
@@ -79,20 +74,22 @@ class MovieScreenModel(
             addFavoriteUseCase(
                 movie = FavoriteMovie(
                     id = movie.id,
-                    title = movie.details?.title.orEmpty(),
-                    posterPath = movie.details?.posterPath.orEmpty()
+                    title = movie.header.title,
+                    posterPath = movie.header.posterPath,
                 )
             ).collectLatest {
                 mutableState.update {
                     it.copy(
-                        isFavorite = true
+                        header = movie.header.copy(
+                            isFavorite = true
+                        )
                     )
                 }
             }
         }
 
     private fun toggleFavorite() = when {
-        mutableState.value.isFavorite -> handleOnRemoveFavorite()
+        mutableState.value.header.isFavorite -> handleOnRemoveFavorite()
         else -> handleOnAddFavorite()
     }
 
