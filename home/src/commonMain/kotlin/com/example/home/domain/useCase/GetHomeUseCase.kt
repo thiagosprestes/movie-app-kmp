@@ -1,10 +1,10 @@
 package com.example.home.domain.useCase
 
+import com.example.core.data.model.ApiResponse
 import com.example.home.domain.mapper.toHomeScreenSectionUiModel
 import com.example.home.domain.repository.HomeRepository
 import com.example.home.domain.strings.HomeScreenStrings
 import com.example.home.presentation.model.HomeState
-import com.example.network.utils.ApiResponse
 import com.example.network.utils.safeApiCall
 import kotlinx.coroutines.flow.Flow
 

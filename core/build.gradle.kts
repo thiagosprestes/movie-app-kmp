@@ -47,6 +47,8 @@ kotlin {
             api(libs.coil.compose)
             api(libs.coil.network.ktor)
 
+            api(libs.voyager.screenmodel)
+
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.serialization.json)
         }

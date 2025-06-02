@@ -2,8 +2,8 @@ package com.example.search.presentation
 
 import cafe.adriel.voyager.core.model.StateScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
+import com.example.core.data.model.ApiResponse
 import com.example.core.data.model.ScreenState
-import com.example.network.utils.ApiResponse
 import com.example.search.domain.useCase.GetSearchResultsUseCase
 import com.example.search.presentation.model.SearchState
 import kotlinx.coroutines.flow.collectLatest

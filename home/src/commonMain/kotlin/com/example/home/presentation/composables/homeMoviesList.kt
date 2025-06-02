@@ -111,9 +111,8 @@ fun homeMoviesList(
             items(sectionUiModel.movies, key = { it.id }) {
                 homeMovieItem(
                     movie = it,
-                ) {
-                    onGoToMovie
-                }
+                    onGoToMovie = onGoToMovie
+                )
             }
         }
     }

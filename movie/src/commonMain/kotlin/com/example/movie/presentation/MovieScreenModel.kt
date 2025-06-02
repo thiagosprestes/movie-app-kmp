@@ -2,6 +2,7 @@ package com.example.movie.presentation
 
 import cafe.adriel.voyager.core.model.StateScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
+import com.example.core.data.model.ApiResponse
 import com.example.core.data.model.ScreenState
 import com.example.movie.domain.local.model.FavoriteMovie
 import com.example.movie.domain.local.useCase.AddFavoriteUseCase
@@ -9,7 +10,6 @@ import com.example.movie.domain.local.useCase.RemoveFavoriteUseCase
 import com.example.movie.domain.remote.model.Movie
 import com.example.movie.domain.remote.useCase.GetMovieUseCase
 import com.example.movie.presentation.model.MovieState
-import com.example.network.utils.ApiResponse
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch

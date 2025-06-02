@@ -1,5 +1,6 @@
 package presentation
 
+import com.example.core.data.model.ApiResponse
 import com.example.core.data.model.HomeMovie
 import com.example.core.data.model.ScreenState
 import com.example.core.presentation.theme.primaryWhite
@@ -15,7 +16,6 @@ import com.example.movie.presentation.model.MovieDetails
 import com.example.movie.presentation.model.MovieHeader
 import com.example.movie.presentation.model.MovieSimilar
 import com.example.movie.presentation.model.MovieState
-import com.example.network.utils.ApiResponse
 import dev.mokkery.answering.returns
 import dev.mokkery.everySuspend
 import dev.mokkery.mock

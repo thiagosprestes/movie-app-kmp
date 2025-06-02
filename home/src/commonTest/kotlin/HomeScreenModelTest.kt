@@ -1,4 +1,5 @@
 
+import com.example.core.data.model.ApiResponse
 import com.example.core.data.model.HomeMovie
 import com.example.core.data.model.ScreenState
 import com.example.home.domain.useCase.GetHomeUseCase
@@ -6,7 +7,6 @@ import com.example.home.presentation.HomeScreenModel
 import com.example.home.presentation.model.HomeScreenSectionUiModel
 import com.example.home.presentation.model.HomeState
 import com.example.home.presentation.model.OnInitHomeScreen
-import com.example.network.utils.ApiResponse
 import dev.mokkery.answering.returns
 import dev.mokkery.everySuspend
 import dev.mokkery.mock
@@ -106,18 +106,20 @@ class HomeScreenModelTest {
         runTest(testDispatcher) {
             val mockedGetHomeUseCase = mock<GetHomeUseCase>()
 
-            val mockedHomeState = HomeState(
-                state = ScreenState.DEFAULT,
-                nowPlayingMovies = fakeHomeNowPlaying,
-                trendingMovies = fakeHomeTrending,
-                upcomingMovies = fakeHomeUpcoming,
+            val mockedHomeState: ApiResponse<HomeState> = ApiResponse.Success(
+                HomeState(
+                    state = ScreenState.LOADING,
+                    nowPlayingMovies = fakeHomeNowPlaying,
+                    trendingMovies = fakeHomeTrending,
+                    upcomingMovies = fakeHomeUpcoming
+                )
             )
 
             val homeScreenModel = HomeScreenModel(
                 getHomeUseCase = mockedGetHomeUseCase
             )
 
-            everySuspend { mockedGetHomeUseCase() } returns flowOf(ApiResponse.Success(mockedHomeState))
+            everySuspend { mockedGetHomeUseCase() } returns flowOf(mockedHomeState)
 
             homeScreenModel::handleAction.invoke(OnInitHomeScreen)
 
