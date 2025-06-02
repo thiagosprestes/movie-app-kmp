@@ -1,5 +1,6 @@
 package com.example.movie.domain.remote.useCase
 
+import com.example.core.data.model.ApiResponse
 import com.example.movie.domain.local.repository.FavoritesRepository
 import com.example.movie.domain.remote.mapper.toCasting
 import com.example.movie.domain.remote.mapper.toMovieDetail
@@ -7,7 +8,6 @@ import com.example.movie.domain.remote.mapper.toMovieHeader
 import com.example.movie.domain.remote.mapper.toSimilar
 import com.example.movie.domain.remote.model.Movie
 import com.example.movie.domain.remote.repository.MovieRepository
-import com.example.network.utils.ApiResponse
 import com.example.network.utils.safeApiCall
 import kotlinx.coroutines.flow.Flow
 

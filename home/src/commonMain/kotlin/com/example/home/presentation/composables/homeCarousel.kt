@@ -1,6 +1,5 @@
 package com.example.home.presentation.composables
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -30,46 +29,49 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.currentOrThrow
 import coil3.compose.AsyncImage
 import com.example.core.data.model.HomeMovie
 import com.example.core.presentation.theme.primaryWhite
-import com.example.navigation.SharedScreen
-import com.example.navigation.utils.getScreenRegistry
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun Carousel(
-    movies: List<HomeMovie>
-) {
-    val pagerState = rememberPagerState(pageCount = {
-        movies.count()
-    })
+private fun carouselIndicator(pagerState: PagerState) {
+    LazyRow(
+        modifier = Modifier.padding(top = 10.dp).fillMaxWidth(),
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        items(pagerState.pageCount, key = { it }) {
+            val color = when {
+                pagerState.currentPage == it -> primaryWhite
+                else -> primaryWhite.copy(
+                    alpha = 0.3f
+                )
+            }
 
-    Column {
-        HorizontalPager(
-            contentPadding = PaddingValues(horizontal = 32.dp),
-            pageSpacing = 15.dp,
-            state = pagerState
-        ) { currentPage ->
-            CarouselItem(movies[currentPage])
+            val size = if (pagerState.currentPage == it) 10.dp else 8.dp
+
+            Box(
+                modifier = Modifier
+                    .padding(2.dp)
+                    .background(color, CircleShape)
+                    .size(size)
+            )
         }
-        CarouselIndicator(pagerState)
     }
 }
 
 @Composable
-fun CarouselItem(movie: HomeMovie) {
-    val navigator = LocalNavigator.currentOrThrow
-
+private fun carouselItem(
+    movie: HomeMovie,
+    onGoToMovie: (Long) -> Unit = {}
+) {
     Box(
         Modifier
             .height(190.dp)
             .width(400.dp)
             .clip(RoundedCornerShape(10.dp))
             .clickable {
-                navigator.push(getScreenRegistry(SharedScreen.Movie(movie.id)))
+                onGoToMovie(movie.id)
             }
     ) {
         AsyncImage(
@@ -96,27 +98,23 @@ fun CarouselItem(movie: HomeMovie) {
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun CarouselIndicator(pagerState: PagerState) {
-    LazyRow(
-        modifier = Modifier.padding(top = 10.dp).fillMaxWidth(),
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        items(pagerState.pageCount, key = { it }) {
-            val color =
-                if (pagerState.currentPage == it) primaryWhite else primaryWhite.copy(
-                    alpha = 0.3f
-                )
-            val size = if (pagerState.currentPage == it) 10.dp else 8.dp
+fun homeCarousel(
+    movies: List<HomeMovie>,
+    onGoToMovie: (Long) -> Unit,
+) {
+    val pagerState = rememberPagerState(pageCount = {
+        movies.count()
+    })
 
-            Box(
-                modifier = Modifier
-                    .padding(2.dp)
-                    .background(color, CircleShape)
-                    .size(size)
-            )
+    Column {
+        HorizontalPager(
+            contentPadding = PaddingValues(horizontal = 32.dp),
+            pageSpacing = 15.dp,
+            state = pagerState
+        ) { currentPage ->
+            carouselItem(movie = movies[currentPage], onGoToMovie = onGoToMovie)
         }
+        carouselIndicator(pagerState)
     }
 }
