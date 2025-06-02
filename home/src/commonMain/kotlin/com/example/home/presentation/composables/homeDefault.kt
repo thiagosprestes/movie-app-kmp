@@ -17,12 +17,14 @@ import androidx.compose.ui.unit.dp
 import com.example.core.data.model.HomeMovie
 import com.example.core.presentation.theme.backgroundGradient
 import com.example.core.utils.windowInsetsPadding
+import com.example.home.presentation.model.HomeScreenSectionUiModel
 
 @Composable
-fun Default(
+fun homeDefault(
     nowPlaying: List<HomeMovie>,
-    trending: List<HomeMovie>,
-    upcoming: List<HomeMovie>
+    trending: HomeScreenSectionUiModel,
+    upcoming: HomeScreenSectionUiModel,
+    onGoToMovie: (Long) -> Unit,
 ) {
     Column(
         Modifier
@@ -36,9 +38,9 @@ fun Default(
                     .calculateTopPadding()
             ),
     ) {
-        Carousel(nowPlaying)
-        MoviesList(title = "Em alta", movies = trending)
-        MoviesList(title = "Novos lançamentos", movies = upcoming)
+        homeCarousel(movies = nowPlaying, onGoToMovie = onGoToMovie)
+        homeMoviesList(sectionUiModel = trending, onGoToMovie = onGoToMovie)
+        homeMoviesList(sectionUiModel = upcoming, onGoToMovie = onGoToMovie)
     }
 }
 
