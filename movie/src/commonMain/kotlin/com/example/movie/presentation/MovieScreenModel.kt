@@ -1,9 +1,11 @@
 package com.example.movie.presentation
 
+import androidx.compose.ui.graphics.Color
 import cafe.adriel.voyager.core.model.StateScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
 import com.example.core.data.model.ApiResponse
 import com.example.core.data.model.ScreenState
+import com.example.core.presentation.theme.primaryWhite
 import com.example.movie.domain.local.model.FavoriteMovie
 import com.example.movie.domain.local.useCase.AddFavoriteUseCase
 import com.example.movie.domain.local.useCase.RemoveFavoriteUseCase
@@ -60,7 +62,8 @@ class MovieScreenModel(
             mutableState.update {
                 it.copy(
                     header = movie.header.copy(
-                        isFavorite = false
+                        isFavorite = false,
+                        starColor = primaryWhite,
                     )
                 )
             }
@@ -81,7 +84,8 @@ class MovieScreenModel(
                 mutableState.update {
                     it.copy(
                         header = movie.header.copy(
-                            isFavorite = true
+                            isFavorite = true,
+                            starColor = Color.Yellow,
                         )
                     )
                 }
