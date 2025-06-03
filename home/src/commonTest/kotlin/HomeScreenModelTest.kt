@@ -1,4 +1,3 @@
-
 import com.example.core.data.model.ApiResponse
 import com.example.core.data.model.HomeMovie
 import com.example.core.data.model.ScreenState
@@ -106,20 +105,22 @@ class HomeScreenModelTest {
         runTest(testDispatcher) {
             val mockedGetHomeUseCase = mock<GetHomeUseCase>()
 
-            val mockedHomeState: ApiResponse<HomeState> = ApiResponse.Success(
-                HomeState(
-                    state = ScreenState.LOADING,
-                    nowPlayingMovies = fakeHomeNowPlaying,
-                    trendingMovies = fakeHomeTrending,
-                    upcomingMovies = fakeHomeUpcoming
-                )
+            val mockedHomeState = HomeState(
+                state = ScreenState.DEFAULT,
+                nowPlayingMovies = fakeHomeNowPlaying,
+                trendingMovies = fakeHomeTrending,
+                upcomingMovies = fakeHomeUpcoming
             )
 
             val homeScreenModel = HomeScreenModel(
                 getHomeUseCase = mockedGetHomeUseCase
             )
 
-            everySuspend { mockedGetHomeUseCase() } returns flowOf(mockedHomeState)
+            everySuspend { mockedGetHomeUseCase() } returns flowOf(
+                ApiResponse.Success(
+                    mockedHomeState
+                )
+            )
 
             homeScreenModel::handleAction.invoke(OnInitHomeScreen)
 

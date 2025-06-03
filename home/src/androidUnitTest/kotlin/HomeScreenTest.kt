@@ -1,6 +1,6 @@
 import app.cash.paparazzi.Paparazzi
 import com.example.core.data.model.HomeMovie
-import com.example.home.presentation.composables.homeDefault
+import com.example.home.presentation.composables.homeScreenDefaultState
 import com.example.home.presentation.model.HomeScreenSectionUiModel
 import org.junit.Rule
 import org.junit.Test
@@ -11,8 +11,8 @@ class HomeScreenTest {
 
     @Test
     fun `show default state`() = paparazzi.snapshot {
-        homeDefault(
-            nowPlaying = listOf(
+        homeScreenDefaultState(
+            nowPlayingMovies = listOf(
                 HomeMovie(
                     id = 1,
                     title = "The Batman",
@@ -22,7 +22,7 @@ class HomeScreenTest {
                     voteCount = 15000
                 ),
             ),
-            trending = HomeScreenSectionUiModel(
+            trendingMovies = HomeScreenSectionUiModel(
                 title = "Trending Movies",
                 movies = listOf(
                     HomeMovie(
@@ -35,7 +35,7 @@ class HomeScreenTest {
                     ),
                 ),
             ),
-            upcoming = HomeScreenSectionUiModel(
+            upcomingMovies = HomeScreenSectionUiModel(
                 title = "Upcoming Movies",
                 movies = listOf(
                     HomeMovie(
