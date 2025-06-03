@@ -11,7 +11,7 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.example.core.data.model.ScreenState
 import com.example.core.presentation.composables.Error
 import com.example.core.presentation.composables.Loading
-import com.example.favorites.presentation.composables.Default
+import com.example.favorites.presentation.composables.favoritesScreenContent
 import com.example.navigation.SharedScreen
 import com.example.navigation.utils.getScreenRegistry
 
@@ -24,20 +24,20 @@ object FavoritesScreen : Screen {
 
         val navigator = LocalNavigator.currentOrThrow
 
-        LaunchedEffect(key1 = Unit) {
-            screenModel.getFavorites()
+        LaunchedEffect(key1 = screenModel) {
+            screenModel::getFavorites.invoke()
         }
 
         when (screenState) {
             ScreenState.LOADING -> Loading()
-            ScreenState.ERROR -> Error(onRetry = { screenModel.getFavorites() })
-            ScreenState.DEFAULT -> Default(favorites = state.favorites, onNavigate = {
+            ScreenState.ERROR -> Error(onRetry = { screenModel::getFavorites.invoke() })
+            ScreenState.DEFAULT -> favoritesScreenContent(state = state) {
                 navigator.push(
                     getScreenRegistry(
                         SharedScreen.Movie(it)
                     )
                 )
-            })
+            }
         }
     }
 }

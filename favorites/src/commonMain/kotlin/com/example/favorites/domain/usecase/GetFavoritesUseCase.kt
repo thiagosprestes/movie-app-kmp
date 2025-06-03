@@ -6,10 +6,15 @@ import com.example.favorites.domain.repository.FavoritesRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class GetFavoritesUseCase(
+interface GetFavoritesUseCase {
+    operator fun invoke(): Flow<DatabaseResponse<List<FavoriteMovie>>>
+}
+
+class GetFavoritesUseCaseImpl(
     private val repository: FavoritesRepository
-) {
-    suspend operator fun invoke(): Flow<DatabaseResponse<List<FavoriteMovie>>> = flow {
+) : GetFavoritesUseCase {
+    override fun invoke(): Flow<DatabaseResponse<List<FavoriteMovie>>> = flow {
+        emit(DatabaseResponse.Loading)
         try {
             val response = repository.getFavorites()
             emit(DatabaseResponse.Success(response))
