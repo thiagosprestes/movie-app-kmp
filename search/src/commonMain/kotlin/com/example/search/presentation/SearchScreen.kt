@@ -2,19 +2,13 @@ package com.example.search.presentation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
-import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -23,18 +17,20 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.koinScreenModel
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import com.example.core.data.model.ScreenState
 import com.example.core.presentation.composables.Error
 import com.example.core.presentation.composables.Loading
 import com.example.core.presentation.theme.backgroundGradient
-import com.example.core.presentation.theme.darkenRed
-import com.example.core.presentation.theme.primaryWhite
 import com.example.core.utils.windowInsetsPadding
-import com.example.search.presentation.composables.Default
+import com.example.navigation.SharedScreen
+import com.example.navigation.utils.getScreenRegistry
+import com.example.search.presentation.composables.searchScreenDefaultState
+import com.example.search.presentation.composables.searchScreenHeader
 import kotlinx.coroutines.delay
 
 object SearchScreen : Screen {
@@ -44,6 +40,8 @@ object SearchScreen : Screen {
 
         val screenModel = koinScreenModel<SearchScreenModel>()
         val state by screenModel.state.collectAsState()
+
+        val navigator = LocalNavigator.currentOrThrow
 
         LaunchedEffect(key1 = textInput) {
             if (textInput.isBlank()) return@LaunchedEffect
@@ -67,27 +65,8 @@ object SearchScreen : Screen {
                         .calculateTopPadding()
                 )
         ) {
-            Row {
-                OutlinedTextField(
-                    value = textInput,
-                    onValueChange = { textInput = it },
-                    shape = RoundedCornerShape(8.dp),
-                    modifier = Modifier.fillMaxWidth(),
-                    label = {
-                        Text(
-                            "Buscar...",
-                            fontWeight = FontWeight.SemiBold,
-                            color = primaryWhite
-                        )
-                    },
-                    colors = TextFieldDefaults.outlinedTextFieldColors(
-                        backgroundColor = primaryWhite.copy(0.3F),
-                        focusedBorderColor = darkenRed,
-                        focusedLabelColor = primaryWhite,
-                        cursorColor = primaryWhite,
-                        textColor = primaryWhite
-                    )
-                )
+            searchScreenHeader {
+                screenModel.getSearchItems(textInput)
             }
             when (state.state) {
                 ScreenState.LOADING -> Loading()
@@ -97,10 +76,12 @@ object SearchScreen : Screen {
                     )
                 })
 
-                ScreenState.DEFAULT -> Default(
+                ScreenState.DEFAULT -> searchScreenDefaultState(
                     movies = state.results,
                     hasNoResultsFound = state.isEmptyResult
-                )
+                ) {
+                    navigator.push(getScreenRegistry(SharedScreen.Movie(it)))
+                }
             }
         }
     }

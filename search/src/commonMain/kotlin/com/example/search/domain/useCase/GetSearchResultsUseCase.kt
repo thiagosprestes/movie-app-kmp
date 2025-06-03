@@ -6,10 +6,14 @@ import com.example.network.utils.safeApiCall
 import com.example.search.domain.repository.SearchRepository
 import kotlinx.coroutines.flow.Flow
 
-class GetSearchResultsUseCase(
+interface GetSearchResultsUseCase {
+    operator fun invoke(query: String): Flow<ApiResponse<List<HomeMovie>>>
+}
+
+class GetSearchResultsUseCaseImpl(
     private val repository: SearchRepository
-) {
-    operator fun invoke(query: String): Flow<ApiResponse<List<HomeMovie>>> = safeApiCall {
+) : GetSearchResultsUseCase {
+    override fun invoke(query: String): Flow<ApiResponse<List<HomeMovie>>> = safeApiCall {
         repository.getSearchItems(query)
     }
 }
