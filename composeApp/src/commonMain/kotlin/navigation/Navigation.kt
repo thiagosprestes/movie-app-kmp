@@ -4,11 +4,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.Icon
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -46,12 +43,15 @@ fun Navigation() {
 private fun RowScope.TabNavigationItem(tab: Tab) {
     val tabNavigator = LocalTabNavigator.current
 
-    BottomNavigationItem(selected = tabNavigator.current == tab,
+    BottomNavigationItem(
+        selected = tabNavigator.current == tab,
         onClick = { tabNavigator.current = tab },
         icon = {
             tab.options.icon?.let {
                 Icon(
-                    painter = it, contentDescription = tab.options.title
+                    painter = it,
+                    contentDescription = tab.options.title,
+                    modifier = Modifier.size(22.dp)
                 )
             }
         },

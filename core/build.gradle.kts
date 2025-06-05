@@ -29,7 +29,6 @@ kotlin {
 
     sourceSets {
         androidMain.dependencies {
-            implementation(libs.compose.ui.tooling.preview)
             implementation(libs.kotlinx.coroutines.android)
             api(libs.koin.android)
         }
@@ -48,6 +47,8 @@ kotlin {
             api(libs.coil.network.ktor)
 
             api(libs.voyager.screenmodel)
+
+            api(libs.composeIcons.fontAwesome)
 
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.serialization.json)

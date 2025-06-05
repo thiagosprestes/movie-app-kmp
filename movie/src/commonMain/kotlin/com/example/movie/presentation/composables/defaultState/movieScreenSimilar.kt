@@ -2,13 +2,7 @@ package com.example.movie.presentation.composables.defaultState
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -38,7 +32,7 @@ fun movieScreenSimilar(
         color = primaryWhite,
         fontSize = 18.sp,
         fontWeight = FontWeight.SemiBold,
-        modifier = Modifier.padding(vertical = 16.dp)
+        modifier = Modifier.padding(start = 16.dp, bottom = 16.dp)
     )
     LazyRow(contentPadding = PaddingValues(start = 16.dp, bottom = 30.dp)) {
         items(similarMovies, key = { it.id }) {

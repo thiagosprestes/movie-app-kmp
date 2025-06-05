@@ -1,26 +1,19 @@
 package com.example.movie.presentation.composables
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.WindowInsetsSides
-import androidx.compose.foundation.layout.asPaddingValues
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.only
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawing
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.outlined.Star
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.core.presentation.theme.primaryWhite
 import com.example.core.utils.windowInsetsPadding
+import compose.icons.FontAwesomeIcons
+import compose.icons.fontawesomeicons.Regular
+import compose.icons.fontawesomeicons.Solid
+import compose.icons.fontawesomeicons.regular.Star
+import compose.icons.fontawesomeicons.solid.ArrowLeft
 
 @Composable
 fun movieScreenHeader(
@@ -42,7 +35,7 @@ fun movieScreenHeader(
             onClick = onGoBack
         ) {
             Icon(
-                Icons.AutoMirrored.Filled.ArrowBack,
+                FontAwesomeIcons.Solid.ArrowLeft,
                 modifier = Modifier.size(24.dp),
                 tint = primaryWhite,
                 contentDescription = null,
@@ -53,7 +46,7 @@ fun movieScreenHeader(
                 onClick = onToggleFavoriteMovie
             ) {
                 Icon(
-                    Icons.Outlined.Star,
+                    FontAwesomeIcons.Regular.Star,
                     modifier = Modifier.size(24.dp),
                     tint = starColor,
                     contentDescription = null,

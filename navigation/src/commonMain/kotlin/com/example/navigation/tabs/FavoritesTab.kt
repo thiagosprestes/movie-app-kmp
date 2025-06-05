@@ -1,7 +1,5 @@
 package com.example.navigation.tabs
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
@@ -10,13 +8,16 @@ import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import com.example.navigation.SharedScreen
 import com.example.navigation.utils.getScreenRegistry
+import compose.icons.FontAwesomeIcons
+import compose.icons.fontawesomeicons.Regular
+import compose.icons.fontawesomeicons.regular.Star
 
 object FavoritesTab : Tab {
     override val options: TabOptions
         @Composable
         get() {
             val title = "Favoritos"
-            val icon = rememberVectorPainter(Icons.Default.Star)
+            val icon = rememberVectorPainter(                FontAwesomeIcons.Regular.Star)
 
             return remember {
                 TabOptions(

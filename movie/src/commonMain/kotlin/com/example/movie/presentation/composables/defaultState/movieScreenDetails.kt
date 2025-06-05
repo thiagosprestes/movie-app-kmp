@@ -1,13 +1,7 @@
 package com.example.movie.presentation.composables.defaultState
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -23,6 +17,7 @@ import coil3.compose.AsyncImage
 import com.example.core.presentation.composables.RatingLevel
 import com.example.core.presentation.theme.backgroundEnd
 import com.example.core.presentation.theme.primaryWhite
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 data class MovieScreenDetailsParams(
     val backdropPath: String,
@@ -98,4 +93,20 @@ fun movieScreenDetails(
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun MovieScreenDetailsPreview() {
+    movieScreenDetails(
+        params = MovieScreenDetailsParams(
+            backdropPath = "https://image.tmdb.org/t/p/w500/your_image_path.jpg",
+            title = "Movie Title",
+            genres = "Action, Adventure",
+            runtime = "2h 30m",
+            releaseDate = "2023-10-01",
+            voteAverage = 8.5,
+            voteCount = 1200
+        )
+    )
 }

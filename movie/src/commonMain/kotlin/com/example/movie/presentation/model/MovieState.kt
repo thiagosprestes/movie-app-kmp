@@ -23,6 +23,7 @@ data class MovieHeader(
 data class MovieDetails(
     val descriptionTitle: String = "",
     val descriptionText: String = "",
+    val buttonText: String = "",
 )
 
 data class MovieCasting(
