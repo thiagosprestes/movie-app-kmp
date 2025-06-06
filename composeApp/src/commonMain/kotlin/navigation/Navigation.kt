@@ -5,16 +5,20 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.*
+import androidx.compose.material.BottomNavigation
+import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.Icon
+import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.navigator.tab.CurrentTab
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
+import com.example.core.presentation.composables.FontSize
+import com.example.core.presentation.composables.Text
 import com.example.core.presentation.theme.bottomBar
 import com.example.core.presentation.theme.darkenRed
 import com.example.core.presentation.theme.primaryWhite
@@ -60,7 +64,9 @@ private fun RowScope.TabNavigationItem(tab: Tab) {
         unselectedContentColor = primaryWhite.copy(0.5F),
         label = {
             Text(
-                text = tab.options.title, fontWeight = FontWeight.SemiBold, fontSize = 10.sp
+                text = tab.options.title,
+                fontWeight = FontWeight.SemiBold,
+                fontSize = FontSize.SMALL,
             )
         })
 }

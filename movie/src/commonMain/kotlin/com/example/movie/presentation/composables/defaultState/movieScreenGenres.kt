@@ -4,13 +4,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.example.core.presentation.composables.Text
+import com.example.core.presentation.theme.darkenGrey
 import com.example.core.presentation.theme.primaryWhite
 import com.example.movie.domain.remote.model.MovieGenre
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -30,10 +28,8 @@ fun movieScreenGenres(
             Text(
                 text = it.name,
                 color = primaryWhite,
-                fontSize = 14.sp,
-                fontWeight = FontWeight.Normal,
                 modifier = Modifier
-                    .background(Color(0xFF303243), shape = RoundedCornerShape(34.dp))
+                    .background(darkenGrey, shape = RoundedCornerShape(34.dp))
                     .padding(horizontal = 18.dp, vertical = 6.dp)
             )
         }

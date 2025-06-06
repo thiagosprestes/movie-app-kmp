@@ -7,13 +7,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.items
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.core.data.model.HomeMovie
+import com.example.core.presentation.composables.FontSize
+import com.example.core.presentation.composables.Text
 import com.example.core.presentation.theme.primaryWhite
 
 @Composable
@@ -27,7 +27,7 @@ fun searchScreenDefaultState(
             Text(
                 text = "Nenhum resultado encontrado",
                 color = primaryWhite,
-                fontSize = 16.sp,
+                fontSize = FontSize.MEDIUM,
                 fontWeight = FontWeight.SemiBold,
                 modifier = Modifier.padding(vertical = 16.dp)
             )
@@ -36,7 +36,7 @@ fun searchScreenDefaultState(
             Text(
                 text = "Resultados",
                 color = primaryWhite,
-                fontSize = 16.sp,
+                fontSize = FontSize.MEDIUM,
                 fontWeight = FontWeight.SemiBold,
                 modifier = Modifier.padding(vertical = 16.dp)
             )

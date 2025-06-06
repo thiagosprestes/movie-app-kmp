@@ -2,21 +2,22 @@ package com.example.movie.presentation.composables.defaultState
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
+import com.example.core.presentation.composables.FontSize
+import com.example.core.presentation.composables.Icon
+import com.example.core.presentation.composables.Text
 import com.example.core.presentation.theme.backgroundEnd
 import com.example.core.presentation.theme.primaryWhite
+import com.example.core.presentation.theme.secondaryGrey
+import com.example.core.presentation.theme.transparent
 import compose.icons.FontAwesomeIcons
 import compose.icons.fontawesomeicons.Regular
 import compose.icons.fontawesomeicons.regular.Clock
@@ -45,7 +46,7 @@ fun movieScreenBackdrop(
                 .fillMaxSize()
                 .background(
                     brush = Brush.verticalGradient(
-                        listOf(Color.Transparent, backgroundEnd),
+                        listOf(transparent, backgroundEnd),
                         0f,
                         850f
                     )
@@ -64,38 +65,35 @@ fun movieScreenBackdrop(
                 Text(
                     text = title,
                     color = primaryWhite,
-                    fontSize = 22.sp,
+                    fontSize = FontSize.LARGE_X,
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center,
                 )
                 Row(modifier = Modifier.padding(top = 5.dp)) {
                     Text(
                         text = releaseDate,
-                        color = Color(0xFFBBBBBB),
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Normal
+                        color = secondaryGrey,
+                        fontSize = FontSize.LARGE,
                     )
                     Text(
                         text = "•",
-                        color = Color(0xFFBBBBBB),
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Normal,
+                        color = secondaryGrey,
+                        fontSize = FontSize.LARGE,
                         modifier = Modifier.padding(horizontal = 6.dp)
                     )
                     Row(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Icon(
-                            FontAwesomeIcons.Regular.Clock,
-                            modifier = Modifier.size(20.dp).padding(end = 6.dp),
-                            tint = Color(0xFFBBBBBB),
-                            contentDescription = null,
+                            icon = FontAwesomeIcons.Regular.Clock,
+                            modifier = Modifier.padding(end = 6.dp),
+                            color = secondaryGrey,
+                            size = 20,
                         )
                         Text(
                             text = runtime,
-                            color = Color(0xFFBBBBBB),
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.Normal
+                            color = secondaryGrey,
+                            fontSize = FontSize.LARGE,
                         )
                     }
                 }

@@ -9,15 +9,15 @@ import cafe.adriel.voyager.navigator.tab.TabOptions
 import com.example.navigation.SharedScreen
 import com.example.navigation.utils.getScreenRegistry
 import compose.icons.FontAwesomeIcons
-import compose.icons.fontawesomeicons.Regular
-import compose.icons.fontawesomeicons.regular.Star
+import compose.icons.fontawesomeicons.Solid
+import compose.icons.fontawesomeicons.solid.Star
 
 object FavoritesTab : Tab {
     override val options: TabOptions
         @Composable
         get() {
             val title = "Favoritos"
-            val icon = rememberVectorPainter(                FontAwesomeIcons.Regular.Star)
+            val icon = rememberVectorPainter(FontAwesomeIcons.Solid.Star)
 
             return remember {
                 TabOptions(

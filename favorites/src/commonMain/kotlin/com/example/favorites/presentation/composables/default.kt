@@ -1,23 +1,15 @@
 package com.example.favorites.presentation.composables
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.WindowInsetsSides
-import androidx.compose.foundation.layout.asPaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.only
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.example.core.presentation.composables.FontSize
+import com.example.core.presentation.composables.Text
 import com.example.core.presentation.theme.backgroundGradient
 import com.example.core.presentation.theme.primaryWhite
 import com.example.core.utils.windowInsetsPadding
@@ -28,7 +20,7 @@ private fun emptyList() {
     Text(
         text = "Você ainda não tem favoritos",
         color = primaryWhite,
-        fontSize = 16.sp
+        fontSize = FontSize.MEDIUM_X
     )
 }
 
@@ -53,7 +45,7 @@ fun favoritesScreenContent(
             modifier = Modifier.padding(bottom = 10.dp),
             text = state.pageTitle,
             color = primaryWhite,
-            fontSize = 18.sp
+            fontSize = FontSize.LARGE
         )
         Column(
             Modifier.fillMaxSize().weight(1f),

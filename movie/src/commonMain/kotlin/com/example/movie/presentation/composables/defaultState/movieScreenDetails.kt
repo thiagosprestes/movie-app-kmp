@@ -2,7 +2,6 @@ package com.example.movie.presentation.composables.defaultState
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -14,7 +13,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
+import com.example.core.presentation.composables.FontSize
 import com.example.core.presentation.composables.RatingLevel
+import com.example.core.presentation.composables.Text
 import com.example.core.presentation.theme.backgroundEnd
 import com.example.core.presentation.theme.primaryWhite
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -62,7 +63,7 @@ fun movieScreenDetails(
                 Text(
                     title,
                     color = primaryWhite,
-                    fontSize = 38.sp,
+                    fontSize = FontSize.LARGE_XX,
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center,
                     lineHeight = 32.sp
@@ -71,22 +72,22 @@ fun movieScreenDetails(
                     Text(
                         genres,
                         color = primaryWhite,
-                        fontSize = 12.sp,
+                        fontSize = FontSize.SMALL,
                         modifier = Modifier.padding(vertical = 16.dp)
                     )
                     Text(
                         " $runtime$releaseDate",
                         color = primaryWhite,
-                        fontSize = 12.sp,
+                        fontSize = FontSize.SMALL,
                         modifier = Modifier.padding(vertical = 16.dp)
                     )
                 }
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    RatingLevel(voteAverage.toDouble(), 16.dp)
+                    RatingLevel(voteAverage.toDouble(), 16)
                     Text(
                         "($voteCount)",
                         color = primaryWhite,
-                        fontSize = 12.sp,
+                        fontSize = FontSize.SMALL,
                         modifier = Modifier.padding(start = 10.dp)
                     )
                 }
