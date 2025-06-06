@@ -3,11 +3,14 @@ package com.example.movie.domain.remote.mapper
 import androidx.compose.ui.graphics.Color
 import com.example.core.data.model.HomeMovie
 import com.example.core.data.model.movieCredits.Cast
+import com.example.core.data.model.movieDetail.Genre
 import com.example.core.data.model.movieDetail.MovieDetailResponse
 import com.example.core.domain.mapper.toUrl
 import com.example.core.presentation.theme.primaryWhite
 import com.example.movie.domain.remote.model.MovieCast
 import com.example.movie.domain.remote.model.MovieDetail
+import com.example.movie.domain.remote.model.MovieGenre
+import com.example.movie.domain.remote.model.MovieGenres
 import com.example.movie.domain.strings.MovieScreenStrings
 import com.example.movie.presentation.model.MovieCasting
 import com.example.movie.presentation.model.MovieDetails
@@ -49,12 +52,10 @@ fun MovieDetail.toMovieHeader(
         backdropPath = this.backdropPath ?: "",
         posterPath = this.posterPath ?: "",
         title = this.title,
-        genres = this.genres.joinToString { it.name },
         rating = this.voteAverage,
         runtime = strings.runtime(this.runtime),
         releaseDate = strings.releaseDate(this.releaseDate),
-        voteAverage = this.voteAverage,
-        voteCount = this.voteCount,
+        voteAverage = this.voteAverage.toFloat(),
     )
 }
 
@@ -72,4 +73,13 @@ fun List<MovieCast>.toCasting(): MovieCasting =
 fun List<HomeMovie>.toSimilar(): MovieSimilar = MovieSimilar(
     title = strings.similarMovies,
     movies = this,
+)
+
+private fun List<Genre>.toMovieGenre(): List<MovieGenre> = this.map {
+    MovieGenre(id = it.id, name = it.name)
+}
+
+fun List<Genre>.toMovieGenres(): MovieGenres = MovieGenres(
+    title = strings.genres,
+    items = this.toMovieGenre()
 )

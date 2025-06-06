@@ -25,7 +25,7 @@ data class MovieScreenDetailsParams(
     val genres: String,
     val runtime: String,
     val releaseDate: String,
-    val voteAverage: Double,
+    val voteAverage: Float,
     val voteCount: Int
 )
 
@@ -82,7 +82,7 @@ fun movieScreenDetails(
                     )
                 }
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    RatingLevel(voteAverage, 16.dp)
+                    RatingLevel(voteAverage.toDouble(), 16.dp)
                     Text(
                         "($voteCount)",
                         color = primaryWhite,
@@ -105,7 +105,7 @@ fun MovieScreenDetailsPreview() {
             genres = "Action, Adventure",
             runtime = "2h 30m",
             releaseDate = "2023-10-01",
-            voteAverage = 8.5,
+            voteAverage = 0.5f,
             voteCount = 1200
         )
     )

@@ -10,5 +10,6 @@ data class Movie(
     val header: MovieHeader = MovieHeader(),
     val details: MovieDetails = MovieDetails(),
     val casting: MovieCasting = MovieCasting(),
+    val genres: MovieGenres = MovieGenres(),
     val similar: MovieSimilar = MovieSimilar(),
 )

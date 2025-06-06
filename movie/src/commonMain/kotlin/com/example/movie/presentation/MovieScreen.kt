@@ -19,7 +19,7 @@ import com.example.core.presentation.composables.Error
 import com.example.core.presentation.composables.Loading
 import com.example.core.presentation.theme.backgroundEnd
 import com.example.movie.presentation.composables.defaultState.MovieScreenDefaultStateParams
-import com.example.movie.presentation.composables.defaultState.movieScreenDefaultStateV2
+import com.example.movie.presentation.composables.defaultState.movieScreenDefaultState
 import com.example.movie.presentation.composables.movieScreenHeader
 import com.example.navigation.SharedScreen
 import com.example.navigation.utils.getScreenRegistry
@@ -47,11 +47,12 @@ data class MovieScreen(val id: Long) : Screen {
                             screenModel::handleAction.invoke(OnInitMovieScreen(id))
                         }
 
-                        ScreenState.DEFAULT -> movieScreenDefaultStateV2(
+                        ScreenState.DEFAULT -> movieScreenDefaultState(
                             params = MovieScreenDefaultStateParams(
                                 header = state.header,
                                 details = state.details,
                                 casting = state.casting,
+                                genres = state.genres,
                                 similar = state.similar,
                             ) { movieId ->
                                 navigator.push(getScreenRegistry(SharedScreen.Movie(movieId)))

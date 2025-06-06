@@ -11,22 +11,14 @@ import com.example.movie.domain.remote.model.MovieCast
 import com.example.movie.domain.remote.useCase.GetMovieUseCase
 import com.example.movie.presentation.MovieScreenModel
 import com.example.movie.presentation.OnInitMovieScreen
-import com.example.movie.presentation.model.MovieCasting
-import com.example.movie.presentation.model.MovieDetails
-import com.example.movie.presentation.model.MovieHeader
-import com.example.movie.presentation.model.MovieSimilar
-import com.example.movie.presentation.model.MovieState
+import com.example.movie.presentation.model.*
 import dev.mokkery.answering.returns
 import dev.mokkery.everySuspend
 import dev.mokkery.mock
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.test.StandardTestDispatcher
-import kotlinx.coroutines.test.advanceUntilIdle
-import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.runTest
-import kotlinx.coroutines.test.setMain
+import kotlinx.coroutines.test.*
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -55,12 +47,10 @@ class MovieScreenModelTest {
             backdropPath = "",
             posterPath = "",
             title = "",
-            genres = "",
             rating = 0.0,
             runtime = "",
             releaseDate = "",
-            voteAverage = 0.0,
-            voteCount = 0,
+            voteAverage = 0f,
         ),
         details = MovieDetails(
             descriptionTitle = "Fake Movie Title",
@@ -104,12 +94,10 @@ class MovieScreenModelTest {
             backdropPath = "",
             posterPath = "",
             title = "",
-            genres = "",
             rating = 0.0,
             runtime = "",
             releaseDate = "",
-            voteAverage = 0.0,
-            voteCount = 0,
+            voteAverage = 0f,
         ),
         details = MovieDetails(
             descriptionTitle = "Fake Movie Title",

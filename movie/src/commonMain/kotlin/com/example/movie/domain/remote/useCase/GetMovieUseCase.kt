@@ -2,10 +2,7 @@ package com.example.movie.domain.remote.useCase
 
 import com.example.core.data.model.ApiResponse
 import com.example.movie.domain.local.repository.FavoritesRepository
-import com.example.movie.domain.remote.mapper.toCasting
-import com.example.movie.domain.remote.mapper.toMovieDetail
-import com.example.movie.domain.remote.mapper.toMovieHeader
-import com.example.movie.domain.remote.mapper.toSimilar
+import com.example.movie.domain.remote.mapper.*
 import com.example.movie.domain.remote.model.Movie
 import com.example.movie.domain.remote.repository.MovieRepository
 import com.example.network.utils.safeApiCall
@@ -28,6 +25,7 @@ class GetMovieUseCaseImpl(
         val header = detailsResponse.toMovieHeader(isFavorite)
         val details = detailsResponse.toMovieDetail()
         val casting = castResponse.toCasting()
+        val genres = detailsResponse.genres.toMovieGenres()
         val similar = similarResponse.toSimilar()
 
         Movie(
@@ -35,6 +33,7 @@ class GetMovieUseCaseImpl(
             header = header,
             details = details,
             casting = casting,
+            genres = genres,
             similar = similar
         )
     }

@@ -7,7 +7,7 @@ import platform.Foundation.localTimeZone
 actual fun String.getFormattedDate(): String {
     val df = NSDateFormatter()
     val timestampFormat = "yyyy-MM-dd"
-    val outputFormat = "dd MMMM yyyy"
+    val outputFormat = "dd/MM/yyyy"
 
     df.dateFormat = timestampFormat
 

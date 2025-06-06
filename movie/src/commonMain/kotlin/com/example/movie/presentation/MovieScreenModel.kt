@@ -29,6 +29,7 @@ class MovieScreenModel(
             header = movie.header,
             details = movie.details,
             casting = movie.casting,
+            genres = movie.genres,
             similar = movie.similar,
         )
     }

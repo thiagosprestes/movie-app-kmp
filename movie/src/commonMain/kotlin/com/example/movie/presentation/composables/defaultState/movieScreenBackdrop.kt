@@ -52,7 +52,7 @@ fun movieScreenBackdrop(
                 )
         )
         Row(
-            modifier = Modifier.align(Alignment.BottomCenter).padding(bottom = 30.dp),
+            modifier = Modifier.align(Alignment.BottomCenter).padding(bottom = 10.dp),
         ) {
             movieScreenRateProgressCircle(
                 percent = percent,
@@ -82,7 +82,9 @@ fun movieScreenBackdrop(
                         fontWeight = FontWeight.Normal,
                         modifier = Modifier.padding(horizontal = 6.dp)
                     )
-                    Row {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
                         Icon(
                             FontAwesomeIcons.Regular.Clock,
                             modifier = Modifier.size(20.dp).padding(end = 6.dp),

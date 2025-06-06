@@ -1,11 +1,11 @@
 package com.example.core.utils
 
 import java.text.SimpleDateFormat
-import java.util.Locale
+import java.util.*
 
 actual fun String.getFormattedDate(): String {
     val timestampFormat = "yyyy-MM-dd"
-    val outputFormat = "dd MMMM yyyy"
+    val outputFormat = "dd/MM/yyyy"
     val local = Locale("pt", "BR")
     val dateFormatter = SimpleDateFormat(outputFormat, local)
 

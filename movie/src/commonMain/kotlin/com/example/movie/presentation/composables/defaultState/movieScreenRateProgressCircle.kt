@@ -28,13 +28,13 @@ fun movieScreenRateProgressCircle(
             drawArc(
                 color = Color(0xFFFF1F8A),
                 startAngle = -90f,
-                sweepAngle = 360 * percent,
+                sweepAngle = percent * 36,
                 useCenter = false,
                 style = Stroke(width = 8.dp.toPx(), cap = StrokeCap.Round)
             )
         }
         Text(
-            text = "${(percent * 100).toInt()}%",
+            text = "${(percent * 10).toInt()}%",
             color = primaryWhite,
             fontWeight = FontWeight.Bold
         )
@@ -45,6 +45,6 @@ fun movieScreenRateProgressCircle(
 @Composable
 fun movieScreenRateProgressCirclePreview() {
     movieScreenRateProgressCircle(
-        percent = 0.75f,
+        percent = 7.1f,
     )
 }
