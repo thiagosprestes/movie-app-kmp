@@ -89,9 +89,9 @@ fun MovieScreenPreview() {
             casting = MovieCasting(
                 title = "Cast",
                 characters = listOf(
-                    MovieCast(id = 1, name = "Christian Bale"),
-                    MovieCast(id = 2, name = "Heath Ledger"),
-                    MovieCast(id = 3, name = "Aaron Eckhart")
+                    MovieCast(id = 1, name = "Christian Bale", character = "Bruce Wayne"),
+                    MovieCast(id = 2, name = "Heath Ledger", character = "Joker"),
+                    MovieCast(id = 3, name = "Aaron Eckhart", character = "Harvey Dent")
                 )
             ),
             genres = MovieGenres(

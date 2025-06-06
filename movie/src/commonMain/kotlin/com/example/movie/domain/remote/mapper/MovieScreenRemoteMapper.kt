@@ -23,7 +23,8 @@ fun List<Cast>.toMovieCast() = map {
     MovieCast(
         id = it.id,
         profilePath = it.profilePath.toUrl(),
-        name = it.name
+        name = it.name,
+        character = it.character,
     )
 }
 

@@ -46,7 +46,7 @@ fun movieScreenCast(
                 fontWeight = FontWeight.SemiBold,
             )
             Text(
-                it.name,
+                it.character,
                 color = primaryWhite,
                 fontSize = 12.sp,
                 fontWeight = FontWeight.Light,
