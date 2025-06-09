@@ -1,9 +1,9 @@
 package com.example.home.data.dataSource
 
 import com.example.core.data.model.movie.MovieResponse
-import io.ktor.client.HttpClient
-import io.ktor.client.call.body
-import io.ktor.client.request.get
+import io.ktor.client.*
+import io.ktor.client.call.*
+import io.ktor.client.request.*
 
 class MovieDataSourceImpl(
     private val httpClient: HttpClient

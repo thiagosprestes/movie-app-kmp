@@ -34,9 +34,9 @@ object HomeScreen : Screen {
 
         when (uiState.state) {
             ScreenState.DEFAULT -> homeScreenDefaultState(
-                nowPlayingMovies = uiState.nowPlayingMovies,
-                trendingMovies = uiState.trendingMovies,
-                upcomingMovies = uiState.upcomingMovies,
+                nowPlayingMovies = uiState.moviesUiModel.nowPlayingMovies,
+                trendingMovies = uiState.moviesUiModel.trendingMovies,
+                upcomingMovies = uiState.moviesUiModel.upcomingMovies,
                 options = uiState.types,
                 selectedOption = uiState.selectedType,
                 onGoToMovie = { onGoToMovie(it) },

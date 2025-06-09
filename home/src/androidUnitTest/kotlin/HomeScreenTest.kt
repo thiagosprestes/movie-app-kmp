@@ -1,7 +1,7 @@
 import app.cash.paparazzi.Paparazzi
 import com.example.core.data.model.HomeMovie
 import com.example.home.presentation.composables.homeScreenDefaultState
-import com.example.home.presentation.model.HomeScreenSectionUiModel
+import com.example.home.presentation.model.HomeScreenMovieSectionUiModel
 import org.junit.Rule
 import org.junit.Test
 
@@ -22,7 +22,7 @@ class HomeScreenTest {
                     voteCount = 15000
                 ),
             ),
-            trendingMovies = HomeScreenSectionUiModel(
+            trendingMovies = HomeScreenMovieSectionUiModel(
                 title = "Trending Movies",
                 movies = listOf(
                     HomeMovie(
@@ -35,7 +35,7 @@ class HomeScreenTest {
                     ),
                 ),
             ),
-            upcomingMovies = HomeScreenSectionUiModel(
+            upcomingMovies = HomeScreenMovieSectionUiModel(
                 title = "Upcoming Movies",
                 movies = listOf(
                     HomeMovie(

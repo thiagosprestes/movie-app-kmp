@@ -3,7 +3,7 @@ import com.example.core.data.model.HomeMovie
 import com.example.core.data.model.ScreenState
 import com.example.home.domain.useCase.GetHomeUseCase
 import com.example.home.presentation.HomeScreenModel
-import com.example.home.presentation.model.HomeScreenSectionUiModel
+import com.example.home.presentation.model.HomeScreenMovieSectionUiModel
 import com.example.home.presentation.model.HomeState
 import com.example.home.presentation.model.OnInitHomeScreen
 import dev.mokkery.answering.returns
@@ -56,7 +56,7 @@ class HomeScreenModelTest {
         )
     )
 
-    private val fakeHomeTrending = HomeScreenSectionUiModel(
+    private val fakeHomeTrending = HomeScreenMovieSectionUiModel(
         title = "Trending Movies",
         movies = listOf(
             HomeMovie(
@@ -78,7 +78,7 @@ class HomeScreenModelTest {
         )
     )
 
-    private val fakeHomeUpcoming = HomeScreenSectionUiModel(
+    private val fakeHomeUpcoming = HomeScreenMovieSectionUiModel(
         title = "Upcoming Movies",
         movies = listOf(
             HomeMovie(

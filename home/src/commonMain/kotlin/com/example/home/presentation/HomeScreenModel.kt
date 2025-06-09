@@ -25,20 +25,49 @@ class HomeScreenModel(
         )
     }
 
+    private fun setMovies(
+        moviesUiModel: HomeScreenMoviesUiModel,
+        types: List<HomeScreenOptionUiModel>
+    ) = mutableState.update {
+        it.copy(
+            state = ScreenState.DEFAULT,
+            moviesUiModel = HomeScreenMoviesUiModel(
+                nowPlayingMovies = moviesUiModel.nowPlayingMovies,
+                trendingMovies = moviesUiModel.trendingMovies,
+                upcomingMovies = moviesUiModel.upcomingMovies,
+            ),
+            types = types,
+        )
+    }
+
+    private fun setTvShows(
+        tvShowsUiModel: HomeScreenTvShowsUiModel,
+        types: List<HomeScreenOptionUiModel>
+    ) = mutableState.update {
+        it.copy(
+            state = ScreenState.DEFAULT,
+            tvShowsUiModel = HomeScreenTvShowsUiModel(
+                popularTvShows = tvShowsUiModel.popularTvShows,
+                topRatedTvShows = tvShowsUiModel.topRatedTvShows,
+                onTheAirTvShows = tvShowsUiModel.onTheAirTvShows,
+            ),
+            types = types,
+        )
+    }
+
     private fun setSuccess(data: HomeState) {
-        mutableState.update {
-            it.copy(
-                state = ScreenState.DEFAULT,
-                nowPlayingMovies = data.nowPlayingMovies,
-                trendingMovies = data.trendingMovies,
-                upcomingMovies = data.upcomingMovies,
-                types = data.types,
-            )
+        val isMovieSelectedType = data.selectedType == HomeScreenSelectedOption.MOVIES
+
+        when {
+            isMovieSelectedType -> setMovies(data.moviesUiModel, data.types)
+            else -> setTvShows(data.tvShowsUiModel, data.types)
         }
     }
 
-    private fun onInit() = screenModelScope.launch {
-        getHomeUseCase().collectLatest { result ->
+    private fun onGetMovies() = screenModelScope.launch {
+        getHomeUseCase(
+            option = mutableState.value.selectedType
+        ).collectLatest { result ->
             when (result) {
                 is ApiResponse.Success -> setSuccess(data = result.data)
                 is ApiResponse.Error -> setError()
@@ -47,14 +76,32 @@ class HomeScreenModel(
         }
     }
 
-    private fun handleOnSelectOption(option: HomeScreenSelectedOption) = mutableState.update {
-        it.copy(
-            selectedType = option
-        )
+    private fun onGetTvShows() = screenModelScope.launch {
+        getHomeUseCase(
+            option = mutableState.value.selectedType
+        ).collectLatest { result ->
+            when (result) {
+                is ApiResponse.Success -> setSuccess(data = result.data)
+                is ApiResponse.Error -> setError()
+                is ApiResponse.Loading -> setLoading()
+            }
+        }
+    }
+
+    private fun handleOnSelectOption(option: HomeScreenSelectedOption) {
+        mutableState.update {
+            it.copy(
+                selectedType = option
+            )
+        }
+        when (option) {
+            HomeScreenSelectedOption.MOVIES -> onGetMovies()
+            HomeScreenSelectedOption.SHOWS -> onGetTvShows()
+        }
     }
 
     internal fun handleAction(action: HomeScreenActions) = when (action) {
-        is OnInitHomeScreen -> onInit()
+        is OnInitHomeScreen -> onGetMovies()
         is OnSelectOption -> handleOnSelectOption(action.option)
     }
 }

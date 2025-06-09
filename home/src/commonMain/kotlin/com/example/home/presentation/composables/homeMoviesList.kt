@@ -20,7 +20,7 @@ import com.example.core.presentation.composables.FontSize
 import com.example.core.presentation.composables.RatingLevel
 import com.example.core.presentation.composables.Text
 import com.example.core.presentation.theme.primaryWhite
-import com.example.home.presentation.model.HomeScreenSectionUiModel
+import com.example.home.presentation.model.HomeScreenMovieSectionUiModel
 
 @Composable
 private fun homeMovieItem(
@@ -83,7 +83,7 @@ private fun homeMovieItem(
 
 @Composable
 fun homeMoviesList(
-    sectionUiModel: HomeScreenSectionUiModel,
+    sectionUiModel: HomeScreenMovieSectionUiModel,
     onGoToMovie: (Long) -> Unit,
 ) {
     Column {
