@@ -30,7 +30,6 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(libs.kotlinx.datetime)
-            implementation(compose.components.uiToolingPreview)
 
             implementation(project(":core"))
             implementation(project(":network"))
@@ -54,8 +53,4 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-}
-
-dependencies {
-    debugImplementation(libs.androidx.ui.tooling)
 }

@@ -50,6 +50,8 @@ kotlin {
 
             api(libs.composeIcons.fontAwesome)
 
+            api(compose.components.uiToolingPreview)
+
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.serialization.json)
         }
@@ -69,4 +71,8 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+}
+
+dependencies {
+    debugImplementation(libs.androidx.ui.tooling)
 }

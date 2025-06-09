@@ -22,6 +22,7 @@ import com.example.core.data.model.HomeMovie
 import com.example.core.presentation.composables.FontSize
 import com.example.core.presentation.composables.Text
 import com.example.core.presentation.theme.primaryWhite
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 private fun carouselIndicator(pagerState: PagerState) {
@@ -99,7 +100,7 @@ fun homeCarousel(
 
     Column {
         HorizontalPager(
-            contentPadding = PaddingValues(horizontal = 32.dp),
+            contentPadding = PaddingValues(start = 16.dp, end = 32.dp),
             pageSpacing = 15.dp,
             state = pagerState
         ) { currentPage ->
@@ -107,4 +108,30 @@ fun homeCarousel(
         }
         carouselIndicator(pagerState)
     }
+}
+
+@Preview
+@Composable
+fun HomeCarouselPreview() {
+    homeCarousel(
+        movies = listOf(
+            HomeMovie(
+                id = 1L,
+                title = "Movie 1",
+                backdropPath = "https://example.com/movie1.jpg",
+                voteCount = 0,
+                voteAverage = 0.0,
+                posterPath = ""
+            ),
+            HomeMovie(
+                id = 1L,
+                title = "Movie 1",
+                backdropPath = "https://example.com/movie1.jpg",
+                voteCount = 0,
+                voteAverage = 0.0,
+                posterPath = ""
+            ),
+        ),
+        onGoToMovie = {}
+    )
 }

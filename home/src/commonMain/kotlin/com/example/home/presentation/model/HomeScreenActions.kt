@@ -1,5 +1,6 @@
 package com.example.home.presentation.model
 
-internal sealed class HomeScreenActions
+sealed class HomeScreenActions
 
 internal object OnInitHomeScreen: HomeScreenActions()
+data class OnSelectOption(val option: HomeScreenSelectedOption): HomeScreenActions()

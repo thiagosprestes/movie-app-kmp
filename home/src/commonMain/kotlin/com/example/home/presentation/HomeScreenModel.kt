@@ -5,9 +5,7 @@ import cafe.adriel.voyager.core.model.screenModelScope
 import com.example.core.data.model.ApiResponse
 import com.example.core.data.model.ScreenState
 import com.example.home.domain.useCase.GetHomeUseCase
-import com.example.home.presentation.model.HomeScreenActions
-import com.example.home.presentation.model.HomeState
-import com.example.home.presentation.model.OnInitHomeScreen
+import com.example.home.presentation.model.*
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -27,13 +25,16 @@ class HomeScreenModel(
         )
     }
 
-    private fun setSuccess(data: HomeState) = mutableState.update {
-        it.copy(
-            state = ScreenState.DEFAULT,
-            nowPlayingMovies = data.nowPlayingMovies,
-            trendingMovies = data.trendingMovies,
-            upcomingMovies = data.upcomingMovies
-        )
+    private fun setSuccess(data: HomeState) {
+        mutableState.update {
+            it.copy(
+                state = ScreenState.DEFAULT,
+                nowPlayingMovies = data.nowPlayingMovies,
+                trendingMovies = data.trendingMovies,
+                upcomingMovies = data.upcomingMovies,
+                types = data.types,
+            )
+        }
     }
 
     private fun onInit() = screenModelScope.launch {
@@ -46,7 +47,14 @@ class HomeScreenModel(
         }
     }
 
+    private fun handleOnSelectOption(option: HomeScreenSelectedOption) = mutableState.update {
+        it.copy(
+            selectedType = option
+        )
+    }
+
     internal fun handleAction(action: HomeScreenActions) = when (action) {
-        OnInitHomeScreen -> onInit()
+        is OnInitHomeScreen -> onInit()
+        is OnSelectOption -> handleOnSelectOption(action.option)
     }
 }

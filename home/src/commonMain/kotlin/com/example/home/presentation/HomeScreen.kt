@@ -13,6 +13,7 @@ import com.example.core.presentation.composables.Error
 import com.example.core.presentation.composables.Loading
 import com.example.home.presentation.composables.homeScreenDefaultState
 import com.example.home.presentation.model.OnInitHomeScreen
+import com.example.home.presentation.model.OnSelectOption
 import com.example.navigation.SharedScreen
 import com.example.navigation.utils.getScreenRegistry
 
@@ -36,7 +37,11 @@ object HomeScreen : Screen {
                 nowPlayingMovies = uiState.nowPlayingMovies,
                 trendingMovies = uiState.trendingMovies,
                 upcomingMovies = uiState.upcomingMovies,
-            ) { onGoToMovie(it) }
+                options = uiState.types,
+                selectedOption = uiState.selectedType,
+                onGoToMovie = { onGoToMovie(it) },
+                onSelectOption = { screenModel::handleAction.invoke(OnSelectOption(it)) }
+            )
 
             ScreenState.LOADING -> Loading()
             ScreenState.ERROR -> Error { screenModel::handleAction.invoke(OnInitHomeScreen) }
